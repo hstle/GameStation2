@@ -15,7 +15,7 @@ export const GAMES: Game[] = [
     id: 'mario-world',
     title: 'Super Mario World',
     thumbnail: 'https://raw.githubusercontent.com/libretro/libretro-thumbnails/master/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/Named_Boxarts/Super%20Mario%20World%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/libretro/libretro-samples/master/retro-roms/snes/2048.sfc',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Super%20Mario%20World%20(USA).sfc',
     description: 'Mario and Luigi embark on a quest to save Dinosaur Land from Bowser.',
     year: '1990',
     genre: 'Platformer',
