@@ -19,7 +19,7 @@ export default defineConfig(({mode}) => {
           description: 'The ultimate retro gaming platform in your browser.',
           theme_color: '#0a0a0a',
           background_color: '#0a0a0a',
-          display: 'fullscreen',
+          display: 'standalone',
           orientation: 'any',
           scope: '/',
           start_url: '/',

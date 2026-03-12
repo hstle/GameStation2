@@ -12,7 +12,6 @@ html, body {
   width: 100%;
   position: relative;
   -webkit-tap-highlight-color: transparent;
-  overscroll-behavior-y: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

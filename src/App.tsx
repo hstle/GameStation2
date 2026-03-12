@@ -227,10 +227,10 @@ export default function App() {
                     </div>
                     <div className="flex flex-col gap-6">
                       {/* Letter Filter */}
-                      <div className="bg-zinc-900/50 border border-white/5 rounded-2xl p-4 w-full overflow-hidden">
-                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x">
+                      <div className="bg-zinc-900/50 border border-white/5 rounded-2xl p-4 w-full overflow-visible">
+                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x -mx-2 px-2">
                           <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black mr-2 shrink-0">Index</span>
-                          <div className="flex items-center gap-1 min-w-max px-2">
+                          <div className="flex items-center gap-1 min-w-max">
                             {letters.map((letter) => (
                               <button
                                 key={letter}
