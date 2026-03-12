@@ -1,10 +1,56 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Game, View } from './types';
 import { GAMES } from './data/games';
 import { GameCard } from './components/GameCard';
 import { Emulator } from './components/Emulator';
-import { Gamepad2, Search, Menu, ArrowRight } from 'lucide-react';
+import { Gamepad2, Search, Menu, ArrowRight, Download, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { VirtuosoGrid } from 'react-virtuoso';
+import { useRetroSound } from './hooks/useRetroSound';
+
+const PWAInstallPrompt = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { playSound } = useRetroSound();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 3000);
+    const hideTimer = setTimeout(() => setIsVisible(false), 10000);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 20, scale: 0.9 }}
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-sm"
+    >
+      <div className="bg-zinc-900 border border-emerald-500/30 rounded-2xl p-4 shadow-2xl backdrop-blur-xl flex items-center gap-4">
+        <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-black shrink-0 shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+          <Download size={24} />
+        </div>
+        <div className="flex-1">
+          <h4 className="text-sm font-black uppercase tracking-tight text-white">Install GameStation</h4>
+          <p className="text-[10px] text-zinc-500 font-medium">Add to Home Screen for the full immersive experience.</p>
+        </div>
+        <button 
+          onClick={() => {
+            playSound('click');
+            setIsVisible(false);
+          }}
+          className="p-2 text-zinc-500 hover:text-white transition-colors"
+        >
+          <X size={18} />
+        </button>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function App() {
   const [view, setView] = useState<View>('library');
@@ -14,27 +60,30 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All Categories');
   const [selectedLetter, setSelectedLetter] = useState<string>('All');
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
-  const [displayLimit, setDisplayLimit] = useState(12);
+  const [displayLimit, setDisplayLimit] = useState(24);
   const gamesGridRef = useRef<HTMLElement>(null);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const { playSound } = useRetroSound();
 
   const handleSelectGame = (game: Game) => {
+    playSound('click');
     setSelectedGame(game);
     setView('player');
   };
 
   const scrollToGames = () => {
+    playSound('click');
     gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleLibraryClick = () => {
+    playSound('click');
     setView('library');
     setSelectedGame(null);
     setSelectedPlatform('All Platforms');
     setSelectedCategory('All Categories');
     setSearchQuery('');
-    setDisplayLimit(12);
-    setTimeout(scrollToGames, 100);
+    setDisplayLimit(24);
+    setTimeout(() => gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
   const filteredGames = GAMES.filter(game => {
@@ -57,33 +106,23 @@ export default function App() {
 
   const displayedGames = filteredGames.slice(0, displayLimit);
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && displayLimit < filteredGames.length) {
-          setDisplayLimit(prev => prev + 12);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+  const loadMore = () => {
+    if (displayLimit < filteredGames.length) {
+      setDisplayLimit(prev => prev + 12);
     }
-
-    return () => observer.disconnect();
-  }, [displayLimit, filteredGames.length]);
+  };
 
   // Reset limit when filters change
-  React.useEffect(() => {
-    setDisplayLimit(12);
+  useEffect(() => {
+    setDisplayLimit(24);
   }, [searchQuery, selectedPlatform, selectedCategory, selectedLetter]);
 
   const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
   const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
+      <PWAInstallPrompt />
       <AnimatePresence mode="wait">
         {view !== 'player' ? (
           <motion.div
@@ -174,15 +213,15 @@ export default function App() {
             {view === 'library' && (
               <>
                 {/* Hero Section */}
-                <section className="relative h-[60vh] flex items-center overflow-hidden">
+                <section className="relative min-h-[70vh] md:h-[80vh] flex items-center overflow-hidden py-20 md:py-0">
                   <div className="absolute inset-0 z-0">
                     <img
                       src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1920"
                       alt="Hero Background"
-                      className="w-full h-full object-cover opacity-30 scale-105"
+                      className="w-full h-full object-cover opacity-20 scale-105"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
                   </div>
 
                   <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
@@ -191,25 +230,25 @@ export default function App() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                      <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic mb-6 leading-[0.9]">
+                      <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase italic mb-6 leading-[0.9] max-w-4xl">
                         The Golden Era <br />
                         <span className="text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.3)]">Reborn.</span>
                       </h2>
-                      <p className="text-zinc-400 max-w-xl text-lg mb-10 leading-relaxed">
+                      <p className="text-zinc-400 max-w-xl text-base md:text-lg mb-10 leading-relaxed">
                         Experience the full power of Libretro in your browser. 
                         Play thousands of classics from N64, SNES, and more with zero latency.
                       </p>
-                      <div className="flex flex-wrap gap-4">
+                      <div className="flex flex-col sm:flex-row gap-4">
                         <button 
                           onClick={scrollToGames}
-                          className="group bg-emerald-500 text-black px-10 py-4 rounded-full font-bold hover:bg-emerald-400 transition-all flex items-center gap-2 shadow-[0_10px_30px_rgba(16,185,129,0.2)]"
+                          className="group bg-emerald-500 text-black px-8 md:px-10 py-4 rounded-full font-black uppercase tracking-tight hover:bg-emerald-400 transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(16,185,129,0.2)]"
                         >
                           Start Playing
                           <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                         <button 
                           onClick={scrollToGames}
-                          className="bg-white/5 border border-white/10 px-10 py-4 rounded-full font-bold hover:bg-white/10 transition-colors"
+                          className="bg-white/5 border border-white/10 px-8 md:px-10 py-4 rounded-full font-black uppercase tracking-tight hover:bg-white/10 transition-colors flex items-center justify-center"
                         >
                           Browse Library
                         </button>
@@ -219,22 +258,25 @@ export default function App() {
                 </section>
 
                 {/* Game Grid */}
-                <main ref={gamesGridRef} className="max-w-7xl mx-auto px-4 py-20 w-full">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                <main ref={gamesGridRef} className="max-w-7xl mx-auto px-4 py-12 md:py-20 w-full">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16">
                     <div>
-                      <h3 className="text-3xl font-bold mb-2">Popular Games</h3>
-                      <p className="text-zinc-500">Hand-picked classics from the community.</p>
+                      <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter italic mb-2">Popular Games</h3>
+                      <p className="text-zinc-500 text-sm">Hand-picked classics from the community.</p>
                     </div>
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-6 w-full md:w-auto">
                       {/* Letter Filter */}
-                      <div className="bg-zinc-900/50 border border-white/5 rounded-2xl p-4 w-full overflow-visible">
-                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x -mx-2 px-2">
+                      <div className="bg-zinc-900/30 border border-white/5 rounded-2xl p-4 w-full overflow-hidden">
+                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x">
                           <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black mr-2 shrink-0">Index</span>
-                          <div className="flex items-center gap-1 min-w-max">
+                          <div className="flex items-center gap-1 min-w-max px-2">
                             {letters.map((letter) => (
                               <button
                                 key={letter}
-                                onClick={() => setSelectedLetter(letter)}
+                                onClick={() => {
+                                  playSound('hover');
+                                  setSelectedLetter(letter);
+                                }}
                                 className={`min-w-[36px] h-9 flex items-center justify-center rounded-lg text-[11px] font-black transition-all ${
                                   letter === selectedLetter
                                     ? 'bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-110 z-10'
@@ -248,15 +290,18 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
+                      <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
                         {['All Platforms', 'Genesis', 'SNES', 'N64', 'GBA', 'GBC'].map((plat) => (
                           <button
                             key={plat}
-                            onClick={() => setSelectedPlatform(plat)}
-                            className={`whitespace-nowrap px-6 py-2 rounded-full text-sm font-bold border transition-all ${
+                            onClick={() => {
+                              playSound('hover');
+                              setSelectedPlatform(plat);
+                            }}
+                            className={`whitespace-nowrap px-6 py-2 rounded-full text-[11px] font-black uppercase tracking-wider border transition-all ${
                               plat === selectedPlatform 
                                 ? 'bg-emerald-500 text-black border-emerald-500 shadow-[0_5px_15px_rgba(16,185,129,0.2)]' 
-                                : 'bg-zinc-900 border-white/5 text-zinc-400 hover:border-emerald-500/30 hover:text-white'
+                                : 'bg-zinc-900/50 border-white/5 text-zinc-500 hover:border-emerald-500/30 hover:text-white'
                             }`}
                           >
                             {plat}
@@ -266,26 +311,31 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {displayedGames.map((game) => (
-                      <GameCard
-                        key={game.id}
-                        game={game}
-                        onSelect={handleSelectGame}
-                      />
-                    ))}
+                  <div className="min-h-[600px]">
+                    <VirtuosoGrid
+                      useWindowScroll
+                      data={displayedGames}
+                      endReached={loadMore}
+                      listClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6"
+                      itemContent={(index, game) => (
+                        <GameCard
+                          key={game.id}
+                          game={game}
+                          onSelect={handleSelectGame}
+                        />
+                      )}
+                    />
                   </div>
 
-                  {/* Infinite Scroll Trigger */}
-                  <div ref={loadMoreRef} className="h-20 flex items-center justify-center mt-12">
-                    {displayLimit < filteredGames.length && (
+                  {displayLimit < filteredGames.length && (
+                    <div className="h-20 flex items-center justify-center mt-12">
                       <div className="flex gap-2">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" />
                         <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]" />
                         <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.4s]" />
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {filteredGames.length === 0 && (
                     <motion.div 

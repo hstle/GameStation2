@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Game } from '../types';
 import { ChevronLeft, Maximize2, Settings, Volume2, Save, Download, RefreshCw, Keyboard, Gamepad2, AlertCircle, Loader2, Globe, ExternalLink, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useRetroSound } from '../hooks/useRetroSound';
 
 interface EmulatorProps {
   game: Game;
@@ -36,6 +37,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
   const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { playSound } = useRetroSound();
 
   const loadingMessages = [
     "Initializing Isolated Environment...",
@@ -163,7 +165,10 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
       <div className="flex items-center justify-between px-6 py-3 bg-[#0a0a0a] border-b border-white/5 z-20">
         <div className="flex items-center gap-6">
           <button
-            onClick={onBack}
+            onClick={() => {
+              playSound('click');
+              onBack();
+            }}
             className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group"
           >
             <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
@@ -185,7 +190,13 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button onClick={handleFullscreen} className="p-2 text-zinc-400 hover:text-white hover:bg-white/5 rounded-full transition-colors">
+          <button 
+            onClick={() => {
+              playSound('click');
+              handleFullscreen();
+            }} 
+            className="p-2 text-zinc-400 hover:text-white hover:bg-white/5 rounded-full transition-colors"
+          >
             <Maximize2 size={18} />
           </button>
         </div>
@@ -310,14 +321,20 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                       <button 
-                        onClick={() => window.location.reload()}
+                        onClick={() => {
+                          playSound('click');
+                          window.location.reload();
+                        }}
                         className="w-full sm:w-auto px-8 py-3 bg-emerald-500 text-black rounded-full font-bold hover:bg-emerald-400 transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(16,185,129,0.2)]"
                       >
                         <RefreshCw size={18} />
                         Retry Loading
                       </button>
                       <button 
-                        onClick={onBack}
+                        onClick={() => {
+                          playSound('click');
+                          onBack();
+                        }}
                         className="w-full sm:w-auto px-8 py-3 bg-white/5 border border-white/10 rounded-full text-white font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
                       >
                         <ChevronLeft size={18} />
