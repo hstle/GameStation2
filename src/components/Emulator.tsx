@@ -83,6 +83,13 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_core = '${core}';
               window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
               window.EJS_startOnLoaded = true;
+              window.EJS_volume = 1;
+              window.EJS_DEBUG_XX = false;
+              
+              // Performance optimizations for mobile/iOS
+              window.EJS_gameID = '${game.id}_' + Math.random().toString(36).substr(2, 9);
+              window.EJS_threads = true;
+              window.EJS_lowLatency = true;
               
               window.EJS_onGameStart = () => {
                 window.parent.postMessage({ type: 'EJS_GAME_START' }, '*');
