@@ -1,98 +1,86 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Game, View, NetplaySession } from './types';
+import React, { useState, useRef } from 'react';
+import { Game, View } from './types';
 import { GAMES } from './data/games';
 import { GameCard } from './components/GameCard';
 import { Emulator } from './components/Emulator';
-import { NetplayLobby } from './components/NetplayLobby';
-import { Gamepad2, Search, User, Menu, ArrowRight, Globe } from 'lucide-react';
+import { Gamepad2, Search, Menu, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { io, Socket } from 'socket.io-client';
 
 export default function App() {
   const [view, setView] = useState<View>('library');
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState<string>('All Platforms');
-  const [sessions, setSessions] = useState<NetplaySession[]>([]);
-  const [isNetplay, setIsNetplay] = useState(false);
-  const [currentSessionId, setCurrentSessionId] = useState<string | undefined>(undefined);
-  const [confirmSession, setConfirmSession] = useState<NetplaySession | null>(null);
-  const socketRef = useRef<Socket | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Categories');
+  const [selectedLetter, setSelectedLetter] = useState<string>('All');
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [displayLimit, setDisplayLimit] = useState(12);
   const gamesGridRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    // Initialize socket connection
-    socketRef.current = io();
-
-    socketRef.current.on('lobby:update', (updatedSessions: NetplaySession[]) => {
-      setSessions(updatedSessions);
-    });
-
-    socketRef.current.on('session:created', (session: NetplaySession) => {
-      const game = GAMES.find(g => g.id === session.gameId);
-      if (game) {
-        setSelectedGame(game);
-        setIsNetplay(true);
-        setCurrentSessionId(session.id);
-        setView('player');
-      }
-    });
-
-    socketRef.current.on('session:ready', () => {
-      // Logic to start the game once both players are in
-      console.log('Session ready!');
-    });
-
-    return () => {
-      socketRef.current?.disconnect();
-    };
-  }, []);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   const handleSelectGame = (game: Game) => {
     setSelectedGame(game);
-    setIsNetplay(false);
-    setCurrentSessionId(undefined);
     setView('player');
-  };
-
-  const handleHostSession = (game: Game) => {
-    socketRef.current?.emit('session:create', {
-      gameId: game.id,
-      gameTitle: game.title,
-      hostName: 'Guest_' + Math.floor(Math.random() * 1000)
-    });
-  };
-
-  const handleJoinSession = (sessionId: string) => {
-    const session = sessions.find(s => s.id === sessionId);
-    if (session) {
-      setConfirmSession(session);
-    }
-  };
-
-  const confirmJoin = () => {
-    if (confirmSession) {
-      const game = GAMES.find(g => g.id === confirmSession.gameId);
-      if (game) {
-        setSelectedGame(game);
-        setIsNetplay(true);
-        setCurrentSessionId(confirmSession.id);
-        setView('player');
-        socketRef.current?.emit('session:join', confirmSession.id);
-      }
-      setConfirmSession(null);
-    }
   };
 
   const scrollToGames = () => {
     gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleLibraryClick = () => {
+    setView('library');
+    setSelectedGame(null);
+    setSelectedPlatform('All Platforms');
+    setSelectedCategory('All Categories');
+    setSearchQuery('');
+    setDisplayLimit(12);
+    setTimeout(scrollToGames, 100);
+  };
+
   const filteredGames = GAMES.filter(game => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesPlatform = selectedPlatform === 'All Platforms' || game.platform === selectedPlatform;
-    return matchesSearch && matchesPlatform;
+    const matchesCategory = selectedCategory === 'All Categories' || game.category === selectedCategory;
+    
+    let matchesLetter = true;
+    if (selectedLetter !== 'All') {
+      const firstChar = game.title.charAt(0).toUpperCase();
+      if (selectedLetter === '#') {
+        matchesLetter = /^[0-9]/.test(firstChar);
+      } else {
+        matchesLetter = firstChar === selectedLetter;
+      }
+    }
+
+    return matchesSearch && matchesPlatform && matchesCategory && matchesLetter;
   });
+
+  const displayedGames = filteredGames.slice(0, displayLimit);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && displayLimit < filteredGames.length) {
+          setDisplayLimit(prev => prev + 12);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [displayLimit, filteredGames.length]);
+
+  // Reset limit when filters change
+  React.useEffect(() => {
+    setDisplayLimit(12);
+  }, [searchQuery, selectedPlatform, selectedCategory, selectedLetter]);
+
+  const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
+  const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans">
@@ -108,27 +96,58 @@ export default function App() {
             {/* Navigation */}
             <header className="sticky top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
               <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-                <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView('library')}>
-                  <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center text-black shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                    <Gamepad2 size={24} />
+                <div className="flex items-center gap-8">
+                  <div className="flex items-center gap-2 cursor-pointer" onClick={handleLibraryClick}>
+                    <div className="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center text-black shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                      <Gamepad2 size={24} />
+                    </div>
+                    <span className="text-xl font-black tracking-tighter uppercase italic">Game Station</span>
                   </div>
-                  <span className="text-xl font-black tracking-tighter uppercase italic">Game Station</span>
-                </div>
 
-                <div className="hidden md:flex items-center gap-8 mx-8">
-                  <button 
-                    onClick={() => setView('library')}
-                    className={`text-sm font-bold uppercase tracking-widest transition-colors ${view === 'library' ? 'text-emerald-500' : 'text-zinc-500 hover:text-white'}`}
-                  >
-                    Library
-                  </button>
-                  <button 
-                    onClick={() => setView('lobby')}
-                    className={`text-sm font-bold uppercase tracking-widest transition-colors flex items-center gap-2 ${view === 'lobby' ? 'text-emerald-500' : 'text-zinc-500 hover:text-white'}`}
-                  >
-                    <Globe size={14} />
-                    Netplay Lobby
-                  </button>
+                    <div className="hidden md:flex items-center gap-8">
+                      <button 
+                        onClick={handleLibraryClick}
+                        className={`text-[13px] font-medium uppercase tracking-wider transition-colors ${view === 'library' && selectedCategory === 'All Categories' && selectedPlatform === 'All Platforms' ? 'text-emerald-500' : 'text-zinc-400 hover:text-white'}`}
+                      >
+                        Library
+                      </button>
+                      
+                      <div className="relative">
+                        <button 
+                          onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
+                          onBlur={() => setTimeout(() => setIsCategoryDropdownOpen(false), 200)}
+                          className={`text-[13px] font-medium uppercase tracking-wider transition-colors flex items-center gap-1.5 ${selectedCategory !== 'All Categories' ? 'text-emerald-500' : 'text-zinc-400 hover:text-white'}`}
+                        >
+                          Categories
+                          <Menu size={14} />
+                        </button>
+                      
+                      <AnimatePresence>
+                        {isCategoryDropdownOpen && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="absolute top-full left-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                          >
+                            {categories.map((cat) => (
+                              <button
+                                key={cat}
+                                onClick={() => {
+                                  setSelectedCategory(cat);
+                                  setIsCategoryDropdownOpen(false);
+                                  scrollToGames();
+                                }}
+                                className={`w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-wider transition-colors hover:bg-white/5 ${cat === selectedCategory ? 'text-emerald-500' : 'text-zinc-400'}`}
+                              >
+                                {cat}
+                              </button>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="hidden md:flex items-center flex-1 max-w-sm mx-8">
@@ -145,10 +164,6 @@ export default function App() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <button className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-bold hover:bg-white/10 transition-colors">
-                    <User size={16} />
-                    Sign In
-                  </button>
                   <button className="p-2 hover:bg-white/5 rounded-full transition-colors md:hidden">
                     <Menu size={20} />
                   </button>
@@ -156,7 +171,7 @@ export default function App() {
               </div>
             </header>
 
-            {view === 'library' ? (
+            {view === 'library' && (
               <>
                 {/* Hero Section */}
                 <section className="relative h-[60vh] flex items-center overflow-hidden">
@@ -176,18 +191,13 @@ export default function App() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6">
-                        <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                        {sessions.length} Active Netplay Sessions
-                      </div>
                       <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase italic mb-6 leading-[0.9]">
                         The Golden Era <br />
                         <span className="text-emerald-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.3)]">Reborn.</span>
                       </h2>
                       <p className="text-zinc-400 max-w-xl text-lg mb-10 leading-relaxed">
                         Experience the full power of Libretro in your browser. 
-                        Play thousands of classics from N64, SNES, PSX, and more with zero latency 
-                        and cloud save support.
+                        Play thousands of classics from N64, SNES, and more with zero latency.
                       </p>
                       <div className="flex flex-wrap gap-4">
                         <button 
@@ -203,13 +213,6 @@ export default function App() {
                         >
                           Browse Library
                         </button>
-                        <button 
-                          onClick={() => setView('lobby')}
-                          className="bg-white/5 border border-white/10 px-10 py-4 rounded-full font-bold hover:bg-white/10 transition-colors flex items-center gap-2"
-                        >
-                          <Globe size={20} />
-                          Netplay Lobby
-                        </button>
                       </div>
                     </motion.div>
                   </div>
@@ -222,15 +225,37 @@ export default function App() {
                       <h3 className="text-3xl font-bold mb-2">Popular Games</h3>
                       <p className="text-zinc-500">Hand-picked classics from the community.</p>
                     </div>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-6">
+                      {/* Letter Filter */}
+                      <div className="bg-zinc-900/50 border border-white/5 rounded-2xl p-4">
+                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black mr-2 shrink-0">Index</span>
+                          <div className="flex items-center gap-1">
+                            {letters.map((letter) => (
+                              <button
+                                key={letter}
+                                onClick={() => setSelectedLetter(letter)}
+                                className={`min-w-[32px] h-8 flex items-center justify-center rounded-lg text-[11px] font-black transition-all ${
+                                  letter === selectedLetter
+                                    ? 'bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-110 z-10'
+                                    : 'text-zinc-500 hover:text-white hover:bg-white/5'
+                                }`}
+                              >
+                                {letter}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-                        {['All Platforms', 'Genesis', 'SNES', 'N64', 'GBA', 'GBC', 'PSX'].map((plat) => (
+                        {['All Platforms', 'Genesis', 'SNES', 'N64', 'GBA', 'GBC'].map((plat) => (
                           <button
                             key={plat}
                             onClick={() => setSelectedPlatform(plat)}
                             className={`whitespace-nowrap px-6 py-2 rounded-full text-sm font-bold border transition-all ${
                               plat === selectedPlatform 
-                                ? 'bg-emerald-500 text-black border-emerald-500' 
+                                ? 'bg-emerald-500 text-black border-emerald-500 shadow-[0_5px_15px_rgba(16,185,129,0.2)]' 
                                 : 'bg-zinc-900 border-white/5 text-zinc-400 hover:border-emerald-500/30 hover:text-white'
                             }`}
                           >
@@ -242,14 +267,24 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {filteredGames.map((game) => (
+                    {displayedGames.map((game) => (
                       <GameCard
                         key={game.id}
                         game={game}
                         onSelect={handleSelectGame}
-                        onHostNetplay={handleHostSession}
                       />
                     ))}
+                  </div>
+
+                  {/* Infinite Scroll Trigger */}
+                  <div ref={loadMoreRef} className="h-20 flex items-center justify-center mt-12">
+                    {displayLimit < filteredGames.length && (
+                      <div className="flex gap-2">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" />
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]" />
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.4s]" />
+                      </div>
+                    )}
                   </div>
 
                   {filteredGames.length === 0 && (
@@ -263,12 +298,13 @@ export default function App() {
                       </div>
                       <h4 className="text-2xl font-bold text-zinc-400 mb-2">No games found</h4>
                       <p className="text-zinc-600 max-w-xs mx-auto">
-                        We couldn't find any games matching "{searchQuery}" in {selectedPlatform}.
+                        We couldn't find any games matching your filters.
                       </p>
                       <button 
                         onClick={() => {
                           setSearchQuery('');
                           setSelectedPlatform('All Platforms');
+                          setSelectedCategory('All Categories');
                         }}
                         className="mt-8 px-8 py-3 bg-white/5 border border-white/10 rounded-full text-sm font-bold hover:bg-white/10 transition-colors"
                       >
@@ -278,15 +314,6 @@ export default function App() {
                   )}
                 </main>
               </>
-            ) : (
-              <NetplayLobby 
-                sessions={sessions} 
-                onJoin={handleJoinSession}
-                onCreate={() => {
-                  setView('library');
-                  setTimeout(scrollToGames, 100);
-                }}
-              />
             )}
 
             {/* Footer */}
@@ -350,49 +377,8 @@ export default function App() {
                 key={selectedGame.id}
                 game={selectedGame}
                 onBack={() => setView('library')}
-                isNetplay={isNetplay}
-                sessionId={currentSessionId}
               />
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {confirmSession && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
-          >
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="w-full max-w-md bg-[#111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl p-8 text-center"
-            >
-              <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-500 mx-auto mb-6">
-                <Globe size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Join Netplay Session?</h3>
-              <p className="text-zinc-400 mb-8">
-                You are about to join <span className="text-white font-bold">{confirmSession.hostName}'s</span> session of <span className="text-emerald-400 font-bold">{confirmSession.gameTitle}</span>.
-              </p>
-              <div className="flex gap-4">
-                <button 
-                  onClick={() => setConfirmSession(null)}
-                  className="flex-1 px-6 py-3 bg-white/5 border border-white/10 rounded-full font-bold hover:bg-white/10 transition-colors"
-                >
-                  Cancel
-                </button>
-                <button 
-                  onClick={confirmJoin}
-                  className="flex-1 px-6 py-3 bg-emerald-500 text-black rounded-full font-bold hover:bg-emerald-400 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.2)]"
-                >
-                  Join Now
-                </button>
-              </div>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

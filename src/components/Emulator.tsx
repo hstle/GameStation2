@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from 'motion/react';
 interface EmulatorProps {
   game: Game;
   onBack: () => void;
-  isNetplay?: boolean;
-  sessionId?: string;
 }
 
 const PLATFORM_MAPPING: Record<string, string> = {
@@ -15,8 +13,7 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'SNES': 'snes',
   'N64': 'n64',
   'GBA': 'gba',
-  'GBC': 'gbc',
-  'PSX': 'psx'
+  'GBC': 'gbc'
 };
 
 declare global {
@@ -33,7 +30,7 @@ declare global {
   }
 }
 
-export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, sessionId }) => {
+export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingStep, setLoadingStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -87,10 +84,6 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
               window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
               window.EJS_startOnLoaded = true;
               
-              // Netplay Configuration
-              window.EJS_netplayUrl = 'https://netplay.emulatorjs.org';
-              window.EJS_gameID = '${game.id}${sessionId ? '-' + sessionId : ''}';
-              
               window.EJS_onGameStart = () => {
                 window.parent.postMessage({ type: 'EJS_GAME_START' }, '*');
               };
@@ -99,7 +92,11 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
                 window.parent.postMessage({ type: 'EJS_LOADED' }, '*');
               };
             </script>
-            <script src="https://cdn.emulatorjs.org/stable/data/loader.js" onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"></script>
+            <script 
+              src="https://cdn.emulatorjs.org/stable/data/loader.js" 
+              crossorigin="anonymous"
+              onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
+            ></script>
           </body>
         </html>
       `;
@@ -140,11 +137,13 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
     window.addEventListener('message', handleMessage);
     
     // Small delay to ensure the component is fully mounted and the iframe ref is stable
-    const setupTimeout = setTimeout(setupIframe, 100);
+    // Also acts as a debounce to prevent race conditions if game changes rapidly
+    const setupTimeout = setTimeout(setupIframe, 300);
 
     return () => {
       isMounted = false;
       clearTimeout(setupTimeout);
+      clearTimeout(loadTimeout);
       if (stepInterval) clearInterval(stepInterval);
       window.removeEventListener('message', handleMessage);
     };
@@ -176,7 +175,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
                 <span className="text-[10px] uppercase tracking-widest text-emerald-500 font-bold">
-                  {isNetplay ? 'Game Station Netplay' : 'Isolated Engine'}
+                  Isolated Engine
                 </span>
               </div>
             </div>
@@ -342,7 +341,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
 
             {/* Isolated Iframe Mount Point */}
             <iframe 
-              key={`${game.id}-${sessionId || 'solo'}`}
+              key={`${game.id}-solo`}
               ref={iframeRef}
               className="w-full h-full border-none"
               title="Emulator Content"
@@ -370,30 +369,6 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
             </div>
           </div>
 
-          {isNetplay && (
-            <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                <Globe size={14} className="text-emerald-500" />
-                <h4 className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Netplay Status</h4>
-              </div>
-              <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
-                <p className="text-xs text-emerald-400 font-bold mb-2 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  Multiplayer Mode Active
-                </p>
-                <p className="text-[10px] text-zinc-400 leading-relaxed mb-3">
-                  To start the session, hover over the bottom of the game screen and click the <span className="text-white font-bold">"Netplay"</span> button in the emulator menu.
-                </p>
-                <div className="flex flex-col gap-1">
-                  <span className="text-[9px] text-zinc-500 uppercase tracking-wider">Room ID:</span>
-                  <code className="text-[10px] bg-black/50 p-1.5 rounded border border-white/5 text-emerald-500 break-all">
-                    {game.id}-{sessionId}
-                  </code>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Keyboard size={14} className="text-emerald-500" />
@@ -405,14 +380,6 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack, isNetplay, ses
                   Controls are automatically mapped. You can customize them in the emulator settings menu (hover over the bottom of the game screen).
                 </p>
               </div>
-            </div>
-          </div>
-
-          <div className="mt-auto">
-            <div className="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl">
-              <p className="text-xs text-emerald-500/80 leading-relaxed">
-                Note: If the game doesn't load, it might be due to CORS restrictions on the ROM host. Providing your own host with CORS enabled will fix this.
-              </p>
             </div>
           </div>
         </div>
