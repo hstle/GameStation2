@@ -35,7 +35,7 @@ export const GAMES: Game[] = [
     id: 'pokemon-emerald',
     title: 'Pokemon Emerald',
     thumbnail: 'https://raw.githubusercontent.com/libretro/libretro-thumbnails/master/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).png',
-    romUrl: 'https://raw.githubusercontent.com/libretro/libretro-samples/master/retro-roms/gba/2048.gba',
+    romUrl: 'https://github.com/hstle/gamestation/raw/refs/heads/main/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).gba',
     description: 'The definitive Hoenn adventure. Catch them all in this GBA classic.',
     year: '2004',
     genre: 'RPG',
