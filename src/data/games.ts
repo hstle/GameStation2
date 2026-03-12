@@ -4,7 +4,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-1',
     title: 'Sonic the Hedgehog',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20the%20Hedgehog%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/b/ba/Sonic_the_Hedgehog_1_Genesis_box_art.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20The%20Hedgehog%20(USA%2C%20Europe).md',
     description: 'The legendary blue blur makes his debut. Experience the speed that defined a generation.',
     year: '1991',
@@ -35,7 +35,7 @@ export const GAMES: Game[] = [
     id: 'pokemon-emerald',
     title: 'Pokemon Emerald',
     thumbnail: 'https://raw.githubusercontent.com/libretro/libretro-thumbnails/master/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).png',
-    romUrl: 'https://github.com/hstle/gamestation/raw/refs/heads/main/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).gba',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).gba',
     description: 'The definitive Hoenn adventure. Catch them all in this GBA classic.',
     year: '2004',
     genre: 'RPG',
