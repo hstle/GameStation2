@@ -2271,7 +2271,7 @@ export const GAMES: Game[] = [
     id: 'sonic-2-genesis',
     title: 'Sonic the Hedgehog 2',
     thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20the%20Hedgehog%202%20(World).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20the%20Hedgehog%202%20(World).md',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20the%20Hedgehog%202%20(USA)%20(Rev-B).md',
     description: 'Sonic and Tails team up for the first time.',
     year: '1992',
     genre: 'Platformer',
