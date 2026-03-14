@@ -10,4 +10,4 @@ export interface Game {
   category: string;
 }
 
-export type View = 'library' | 'player';
+export type View = 'library' | 'player' | 'bulk-add';

@@ -14,7 +14,8 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'SNES': 'snes',
   'N64': 'n64',
   'GBA': 'gba',
-  'GBC': 'gbc'
+  'GBC': 'gbc',
+  'NES': 'nes'
 };
 
 declare global {

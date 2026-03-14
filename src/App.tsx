@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactPlayer from 'react-player';
 import { Game, View } from './types';
 import { GAMES } from './data/games';
 import { GameCard } from './components/GameCard';
@@ -62,6 +63,7 @@ export default function App() {
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
   const [displayLimit, setDisplayLimit] = useState(24);
   const gamesGridRef = useRef<HTMLElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
   const { playSound } = useRetroSound();
 
   const handleSelectGame = (game: Game) => {
@@ -82,7 +84,6 @@ export default function App() {
     setSelectedPlatform('All Platforms');
     setSelectedCategory('All Categories');
     setSearchQuery('');
-    setDisplayLimit(24);
     setTimeout(() => gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
 
@@ -104,19 +105,6 @@ export default function App() {
     return matchesSearch && matchesPlatform && matchesCategory && matchesLetter;
   });
 
-  const displayedGames = filteredGames.slice(0, displayLimit);
-
-  const loadMore = () => {
-    if (displayLimit < filteredGames.length) {
-      setDisplayLimit(prev => prev + 12);
-    }
-  };
-
-  // Reset limit when filters change
-  useEffect(() => {
-    setDisplayLimit(24);
-  }, [searchQuery, selectedPlatform, selectedCategory, selectedLetter]);
-
   const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
   const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
@@ -124,6 +112,34 @@ export default function App() {
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
       <PWAInstallPrompt />
       <AnimatePresence mode="wait">
+        {/* Mute Toggle */}
+        <div className="fixed bottom-6 right-6 z-[100]">
+          <button
+            onClick={() => {
+              playSound('click');
+              setIsMuted(!isMuted);
+            }}
+            className="w-12 h-12 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center text-zinc-400 hover:text-emerald-500 hover:border-emerald-500/50 transition-all shadow-2xl group"
+          >
+            {isMuted ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            )}
+          </button>
+        </div>
+
+        {/* Background Music */}
+        <div className="sr-only pointer-events-none">
+          <ReactPlayer
+            src="https://www.youtube.com/watch?v=egai2BNnzhk&list=RDegai2BNnzhk&start_radio=1"
+            playing={true}
+            loop={true}
+            volume={isMuted ? 0 : 0.1}
+            width="0"
+            height="0"
+          />
+        </div>
         {view !== 'player' ? (
           <motion.div
             key="main"
@@ -314,8 +330,7 @@ export default function App() {
                   <div className="min-h-[600px]">
                     <VirtuosoGrid
                       useWindowScroll
-                      data={displayedGames}
-                      endReached={loadMore}
+                      data={filteredGames}
                       listClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6"
                       itemContent={(index, game) => (
                         <GameCard
@@ -326,16 +341,6 @@ export default function App() {
                       )}
                     />
                   </div>
-
-                  {displayLimit < filteredGames.length && (
-                    <div className="h-20 flex items-center justify-center mt-12">
-                      <div className="flex gap-2">
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce" />
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.2s]" />
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-bounce [animation-delay:0.4s]" />
-                      </div>
-                    </div>
-                  )}
 
                   {filteredGames.length === 0 && (
                     <motion.div 
