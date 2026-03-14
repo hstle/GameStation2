@@ -6,7 +6,7 @@ export interface Game {
   description: string;
   year: string;
   genre: string;
-  platform: 'Genesis' | 'SNES' | 'N64' | 'GBA' | 'GBC';
+  platform: string;
   category: string;
 }
 
