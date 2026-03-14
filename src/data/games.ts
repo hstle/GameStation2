@@ -48,7 +48,7 @@ export const GAMES: Game[] = [
   {
     id: 'zelda-dx',
     title: 'Zelda: Link\'s Awakening DX',
-    thumbnail: 'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Color/Named_Boxarts/Legend%20of%20Zelda%2C%20The%20-%20Link\'s%20Awakening%20DX%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/5/5c/The_Legend_of_Zelda_-_Link%27s_Awakening_DX_box_art.png',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Legend%20of%20Zelda%2C%20The%20-%20Link\'s%20Awakening%20DX%20(USA%2C%20Europe).gbc',
     description: 'Link is shipwrecked on the mysterious Koholint Island.',
     year: '1998',
@@ -81,7 +81,7 @@ export const GAMES: Game[] = [
   {
     id: 'batman-robin',
     title: 'Adventures of Batman & Robin',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Adventures%20of%20Batman%20%26%20Robin%2C%20The%20(USA).png',
+    thumbnail: 'https://static.wikia.nocookie.net/batmantheanimatedseries/images/c/c7/Genesis.jpg/revision/latest?cb=20130217085746',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Adventures%20of%20Batman%20%26%20Robin%2C%20The%20(USA).md',
     description: 'Stunning graphics and intense action in this Batman classic.',
     year: '1995',
@@ -433,7 +433,7 @@ export const GAMES: Game[] = [
   {
     id: 'alien-3',
     title: 'Alien 3',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Alien%203%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/4/4b/Alien3_game_cover_art.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Alien%203%20(USA)%20(Rev-A).md',
     description: 'Survive the alien threat in this movie-based action game.',
     year: '1992',
@@ -3740,203 +3740,5 @@ export const GAMES: Game[] = [
     genre: 'Platformer',
     platform: 'Genesis',
     category: 'Platformer'
-  },
-  {
-    id: '6-in-1-genesis',
-    title: '6-in-1',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/6-in-1%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/6-in-1%20(USA).md',
-    description: 'Compilation of six classic Genesis games.',
-    year: '1995',
-    genre: 'Compilation',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'aero-blasters-genesis',
-    title: 'Aero Blasters',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Aero%20Blasters%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Aero%20Blasters%20(USA).md',
-    description: 'Side-scrolling shooter with intense action.',
-    year: '1991',
-    genre: 'Shooter',
-    platform: 'Genesis',
-    category: 'Shooter'
-  },
-  {
-    id: 'air-buster-genesis',
-    title: 'Air Buster',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Air%20Buster%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Air%20Buster%20(USA).md',
-    description: 'Fast-paced side-scrolling shooter.',
-    year: '1991',
-    genre: 'Shooter',
-    platform: 'Genesis',
-    category: 'Shooter'
-  },
-  {
-    id: 'air-diver-genesis',
-    title: 'Air Diver',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Air%20Diver%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Air%20Diver%20(USA).md',
-    description: 'First-person flight combat simulator.',
-    year: '1990',
-    genre: 'Simulation',
-    platform: 'Genesis',
-    category: 'Simulation'
-  },
-  {
-    id: 'alisia-dragoon-genesis',
-    title: 'Alisia Dragoon',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Alisia%20Dragoon%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Alisia%20Dragoon%20(USA).md',
-    description: 'Action game with a unique targeting system.',
-    year: '1992',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'atomic-runner-genesis',
-    title: 'Atomic Runner',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Atomic%20Runner%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Atomic%20Runner%20(USA).md',
-    description: 'Side-scrolling action platformer.',
-    year: '1992',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'bob-genesis',
-    title: 'B.O.B.',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/B.O.B.%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/B.O.B.%20(USA).md',
-    description: 'Action platformer with a robot protagonist.',
-    year: '1993',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'ballz-3d-genesis',
-    title: 'Ballz 3D',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Ballz%203D%20-%20Fighting%20at%20Its%20Ballziest%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Ballz%203D%20-%20Fighting%20at%20Its%20Ballziest%20(USA).md',
-    description: 'Unique 3D fighting game with ball-based characters.',
-    year: '1994',
-    genre: 'Fighting',
-    platform: 'Genesis',
-    category: 'Fighting'
-  },
-  {
-    id: 'battle-master-genesis',
-    title: 'Battle Master',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Battle%20Master%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Battle%20Master%20(USA).md',
-    description: 'Action RPG with tactical combat.',
-    year: '1991',
-    genre: 'RPG',
-    platform: 'Genesis',
-    category: 'RPG'
-  },
-  {
-    id: 'battletech-genesis',
-    title: 'Battletech',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Battletech%20-%20A%20Game%20of%20Armored%20Combat%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Battletech%20-%20A%20Game%20of%20Armored%20Combat%20(USA).md',
-    description: 'Mech combat simulation.',
-    year: '1994',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'battletoads-double-dragon-genesis',
-    title: 'Battletoads & Double Dragon',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Battletoads%20%26%20Double%20Dragon%20-%20The%20Ultimate%20Team%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Battletoads%20%26%20Double%20Dragon%20-%20The%20Ultimate%20Team%20(USA).md',
-    description: 'The ultimate crossover beat em up.',
-    year: '1993',
-    genre: 'Beat em up',
-    platform: 'Genesis',
-    category: 'Beat em up'
-  },
-  {
-    id: 'battletoads-genesis',
-    title: 'Battletoads',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Battletoads%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Battletoads%20(USA).md',
-    description: 'Infamously difficult beat em up action.',
-    year: '1991',
-    genre: 'Beat em up',
-    platform: 'Genesis',
-    category: 'Beat em up'
-  },
-  {
-    id: 'beavis-butt-head-genesis',
-    title: 'Beavis and Butt-Head',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Beavis%20and%20Butt-Head%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Beavis%20and%20Butt-Head%20(USA).md',
-    description: 'Help the duo find their GWAR tickets.',
-    year: '1994',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'beyond-oasis-genesis',
-    title: 'Beyond Oasis',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Beyond%20Oasis%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Beyond%20Oasis%20(USA).md',
-    description: 'Action RPG with beautiful graphics and fluid combat.',
-    year: '1994',
-    genre: 'RPG',
-    platform: 'Genesis',
-    category: 'RPG'
-  },
-  {
-    id: 'bio-hazard-battle-genesis',
-    title: 'Bio-Hazard Battle',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Bio-Hazard%20Battle%20(USA%2C%20Europe).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Bio-Hazard%20Battle%20(USA%2C%20Europe).md',
-    description: 'Atmospheric side-scrolling shooter.',
-    year: '1992',
-    genre: 'Shooter',
-    platform: 'Genesis',
-    category: 'Shooter'
-  },
-  {
-    id: 'blades-vengeance-genesis',
-    title: 'Blades of Vengeance',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Blades%20of%20Vengeance%20(USA%2C%20Europe).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Blades%20of%20Vengeance%20(USA%2C%20Europe).md',
-    description: 'Fantasy action platformer with three playable characters.',
-    year: '1993',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'blaster-master-2-genesis',
-    title: 'Blaster Master 2',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Blaster%20Master%202%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Blaster%20Master%202%20(USA).md',
-    description: 'The sequel to the NES classic, exclusive to Genesis.',
-    year: '1993',
-    genre: 'Action',
-    platform: 'Genesis',
-    category: 'Action'
-  },
-  {
-    id: 'bloodshot-genesis',
-    title: 'Bloodshot',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Bloodshot%20(Europe).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Bloodshot%20(Europe).md',
-    description: 'First-person shooter with split-screen multiplayer.',
-    year: '1994',
-    genre: 'Shooter',
-    platform: 'Genesis',
-    category: 'Shooter'
-  }
+  },  
 ];

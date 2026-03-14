@@ -64,7 +64,78 @@ export default function App() {
   const [displayLimit, setDisplayLimit] = useState(24);
   const gamesGridRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const { playSound } = useRetroSound();
+
+  const filteredGames = GAMES.filter(game => {
+    const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesPlatform = selectedPlatform === 'All Platforms' || game.platform === selectedPlatform;
+    const matchesCategory = selectedCategory === 'All Categories' || game.category === selectedCategory;
+    
+    let matchesLetter = true;
+    if (selectedLetter !== 'All') {
+      const firstChar = game.title.charAt(0).toUpperCase();
+      if (selectedLetter === '#') {
+        matchesLetter = /^[0-9]/.test(firstChar);
+      } else {
+        matchesLetter = firstChar === selectedLetter;
+      }
+    }
+
+    return matchesSearch && matchesPlatform && matchesCategory && matchesLetter;
+  });
+
+  // Gamepad Support
+  useEffect(() => {
+    let rafId: number;
+    let lastButtonPress = 0;
+    const BUTTON_COOLDOWN = 200;
+
+    const pollGamepad = () => {
+      const gamepads = navigator.getGamepads();
+      const gp = gamepads[0];
+
+      if (gp && view === 'library') {
+        const now = Date.now();
+        if (now - lastButtonPress > BUTTON_COOLDOWN) {
+          // D-Pad or Left Stick
+          const up = gp.buttons[12]?.pressed || gp.axes[1] < -0.5;
+          const down = gp.buttons[13]?.pressed || gp.axes[1] > 0.5;
+          const left = gp.buttons[14]?.pressed || gp.axes[0] < -0.5;
+          const right = gp.buttons[15]?.pressed || gp.axes[0] > 0.5;
+          const select = gp.buttons[0]?.pressed; // A button
+
+          if (up || down || left || right || select) {
+            lastButtonPress = now;
+            
+            if (select && focusedIndex !== -1) {
+              handleSelectGame(filteredGames[focusedIndex]);
+              return;
+            }
+
+            setFocusedIndex(prev => {
+              if (prev === -1) return 0;
+              
+              // Grid logic (assuming roughly 6 columns on desktop, 2 on mobile)
+              // We'll just do simple linear for now, or try to guess columns
+              const cols = window.innerWidth >= 1280 ? 6 : window.innerWidth >= 1024 ? 5 : window.innerWidth >= 640 ? 3 : 2;
+              
+              if (right) return Math.min(prev + 1, filteredGames.length - 1);
+              if (left) return Math.max(prev - 1, 0);
+              if (down) return Math.min(prev + cols, filteredGames.length - 1);
+              if (up) return Math.max(prev - cols, 0);
+              
+              return prev;
+            });
+          }
+        }
+      }
+      rafId = requestAnimationFrame(pollGamepad);
+    };
+
+    rafId = requestAnimationFrame(pollGamepad);
+    return () => cancelAnimationFrame(rafId);
+  }, [view, focusedIndex, filteredGames]);
 
   const handleSelectGame = (game: Game) => {
     playSound('click');
@@ -86,24 +157,6 @@ export default function App() {
     setSearchQuery('');
     setTimeout(() => gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
-
-  const filteredGames = GAMES.filter(game => {
-    const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesPlatform = selectedPlatform === 'All Platforms' || game.platform === selectedPlatform;
-    const matchesCategory = selectedCategory === 'All Categories' || game.category === selectedCategory;
-    
-    let matchesLetter = true;
-    if (selectedLetter !== 'All') {
-      const firstChar = game.title.charAt(0).toUpperCase();
-      if (selectedLetter === '#') {
-        matchesLetter = /^[0-9]/.test(firstChar);
-      } else {
-        matchesLetter = firstChar === selectedLetter;
-      }
-    }
-
-    return matchesSearch && matchesPlatform && matchesCategory && matchesLetter;
-  });
 
   const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
   const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
@@ -331,12 +384,13 @@ export default function App() {
                     <VirtuosoGrid
                       useWindowScroll
                       data={filteredGames}
+                      computeItemKey={(index, game) => game.id}
                       listClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6"
                       itemContent={(index, game) => (
                         <GameCard
-                          key={game.id}
                           game={game}
                           onSelect={handleSelectGame}
+                          isFocused={index === focusedIndex}
                         />
                       )}
                     />

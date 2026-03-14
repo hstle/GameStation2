@@ -36,8 +36,10 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingStep, setLoadingStep] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [reloadCount, setReloadCount] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
   const { playSound } = useRetroSound();
 
   const loadingMessages = [
@@ -63,6 +65,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
       const core = PLATFORM_MAPPING[game.platform] || 'segaMD';
       
+      // Use a more robust pathtodata and add more config options
       const html = `
         <!DOCTYPE html>
         <html>
@@ -75,7 +78,6 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
           <body>
             <div id="game"></div>
             <script>
-              // Relay errors to parent
               window.onerror = function(msg, url, line, col, error) {
                 window.parent.postMessage({ type: 'EJS_ERROR', message: msg }, '*');
                 return false;
@@ -84,10 +86,12 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_player = '#game';
               window.EJS_gameUrl = '${game.romUrl}';
               window.EJS_core = '${core}';
-              window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+              window.EJS_pathtodata = 'https://cdn.emulatorjs.org/latest/data/';
               window.EJS_startOnLoaded = true;
-              window.EJS_volume = 1;
+              window.EJS_volume = ${isMuted ? 0 : 1};
               window.EJS_DEBUG_XX = false;
+              window.EJS_mouse = false;
+              window.EJS_multitap = false;
               
               window.EJS_onGameStart = () => {
                 window.parent.postMessage({ type: 'EJS_GAME_START' }, '*');
@@ -98,7 +102,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="https://cdn.emulatorjs.org/stable/data/loader.js" 
+              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
               crossorigin="anonymous"
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>
@@ -152,7 +156,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
       if (stepInterval) clearInterval(stepInterval);
       window.removeEventListener('message', handleMessage);
     };
-  }, [game]);
+  }, [game, reloadCount]);
 
   const handleFullscreen = () => {
     if (containerRef.current?.requestFullscreen) {
@@ -191,6 +195,15 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
         </div>
 
         <div className="flex items-center gap-4">
+          <button 
+            onClick={() => {
+              playSound('click');
+              setIsMuted(!isMuted);
+            }} 
+            className="p-2 text-zinc-400 hover:text-white hover:bg-white/5 rounded-full transition-colors"
+          >
+            {isMuted ? <Volume2 size={18} className="opacity-50" /> : <Volume2 size={18} />}
+          </button>
           <button 
             onClick={() => {
               playSound('click');
@@ -324,12 +337,15 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                       <button 
                         onClick={() => {
                           playSound('click');
-                          window.location.reload();
+                          setReloadCount(prev => prev + 1);
+                          setIsLoading(true);
+                          setError(null);
+                          setLoadingStep(0);
                         }}
                         className="w-full sm:w-auto px-8 py-3 bg-emerald-500 text-black rounded-full font-bold hover:bg-emerald-400 transition-all flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(16,185,129,0.2)]"
                       >
                         <RefreshCw size={18} />
-                        Retry Loading
+                        Retry Engine
                       </button>
                       <button 
                         onClick={() => {
@@ -361,7 +377,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
             {/* Isolated Iframe Mount Point */}
             <iframe 
-              key={`${game.id}-solo`}
+              key={`${game.id}-solo-${reloadCount}`}
               ref={iframeRef}
               className="w-full h-full border-none"
               title="Emulator Content"
