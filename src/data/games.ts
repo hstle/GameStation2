@@ -3740,5 +3740,60 @@ export const GAMES: Game[] = [
     genre: 'Platformer',
     platform: 'Genesis',
     category: 'Platformer'
-  },  
+  },
+  {
+    id: 'castlevania-sotn',
+    title: 'Castlevania: Symphony of the Night',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/1/12/Castlevania_Symphony_of_the_Night_North_American_cover_art.jpg',
+    romUrl: 'https://archive.org/download/psx_castlevania_sotn/Castlevania%20-%20Symphony%20of%20the%20Night%20%28USA%29.chd',
+    description: 'A masterpiece of exploration and action. Alucard explores Draculas castle in this genre-defining classic.',
+    year: '1997',
+    genre: 'Action-RPG',
+    platform: 'PSX',
+    category: 'Action'
+  },
+  {
+    id: 'metal-gear-solid',
+    title: 'Metal Gear Solid',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/33/Metal_Gear_Solid_cover_art.png',
+    romUrl: 'https://archive.org/download/psx_mgs1/Metal%20Gear%20Solid%20%28USA%29%20%28Disc%201%29.chd',
+    description: 'Tactical Espionage Action. Solid Snake must infiltrate Shadow Moses to stop a nuclear threat.',
+    year: '1998',
+    genre: 'Stealth',
+    platform: 'PSX',
+    category: 'Action'
+  },
+  {
+    id: 'resident-evil-2',
+    title: 'Resident Evil 2',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/7/73/Resident_Evil_2_box_art.png',
+    romUrl: 'https://archive.org/download/psx_re2/Resident%20Evil%202%20%28USA%29%20%28Disc%201%29.chd',
+    description: 'Survival horror at its finest. Leon and Claire must survive the zombie outbreak in Raccoon City.',
+    year: '1998',
+    genre: 'Survival Horror',
+    platform: 'PSX',
+    category: 'Action'
+  },
+  {
+    id: 'crash-bandicoot',
+    title: 'Crash Bandicoot',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/4/44/Crash_Bandicoot_Cover.png',
+    romUrl: 'https://archive.org/download/psx_crash1/Crash%20Bandicoot%20%28USA%29.chd',
+    description: 'The iconic PlayStation platformer. Help Crash stop Dr. Neo Cortex.',
+    year: '1996',
+    genre: 'Platformer',
+    platform: 'PSX',
+    category: 'Platformer'
+  },
+  {
+    id: 'tekken-3',
+    title: 'Tekken 3',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/0/0e/Tekken_3_Coverart.jpg',
+    romUrl: 'https://archive.org/download/psx_tekken3/Tekken%203%20%28USA%29.chd',
+    description: 'One of the greatest fighting games of all time. King of Iron Fist Tournament 3.',
+    year: '1998',
+    genre: 'Fighting',
+    platform: 'PSX',
+    category: 'Action'
+  }
 ];

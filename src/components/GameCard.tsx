@@ -23,7 +23,8 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onSelect, isFocused })
       'N64': 'Nintendo%20-%20Nintendo%2064',
       'GBA': 'Nintendo%20-%20Game%20Boy%20Advance',
       'GBC': 'Nintendo%20-%20Game%20Boy%20Color',
-      'NES': 'Nintendo%20-%20Nintendo%20Entertainment%20System'
+      'NES': 'Nintendo%20-%20Nintendo%20Entertainment%20System',
+      'PSX': 'Sony%20-%20PlayStation'
     };
 
     const folder = platformMap[game.platform];
@@ -43,12 +44,6 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onSelect, isFocused })
       setImgSrc(`https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=400`);
     }
   };
-
-  React.useEffect(() => {
-    if (isFocused && cardRef.current) {
-      cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }, [isFocused]);
 
   return (
     <motion.div

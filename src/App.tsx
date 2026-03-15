@@ -65,6 +65,7 @@ export default function App() {
   const gamesGridRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
+  const virtuosoRef = useRef<any>(null);
   const { playSound } = useRetroSound();
 
   const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
@@ -74,6 +75,21 @@ export default function App() {
   useEffect(() => {
     setFocusedIndex(-1);
   }, [selectedPlatform, selectedCategory, selectedLetter, searchQuery]);
+
+  // Scroll to focused item
+  useEffect(() => {
+    if (focusedIndex !== -1 && virtuosoRef.current) {
+      // Use a small timeout to ensure the grid has rendered if needed
+      const timer = setTimeout(() => {
+        virtuosoRef.current.scrollToIndex({
+          index: focusedIndex,
+          align: 'center',
+          behavior: 'smooth'
+        });
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [focusedIndex]);
 
   const filteredGames = GAMES.filter(game => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -219,7 +235,7 @@ export default function App() {
             src="https://www.youtube.com/watch?v=egai2BNnzhk&list=RDegai2BNnzhk&start_radio=1"
             playing={true}
             loop={true}
-            volume={isMuted ? 0 : 0.1}
+            volume={isMuted ? 0 : 0.15}
             width="0"
             height="0"
           />
@@ -366,7 +382,7 @@ export default function App() {
                     </div>
                     <div className="flex flex-col gap-6 w-full md:w-auto">
                       {/* Letter Filter */}
-                      <div className="bg-zinc-900/30 border border-white/5 rounded-2xl p-4 w-full overflow-hidden">
+                      <div className="bg-zinc-900/30 border border-white/5 rounded-2xl p-4 w-full max-w-2xl overflow-hidden mx-auto md:mx-0">
                         <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x scroll-smooth snap-x snap-mandatory">
                           <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black mr-2 shrink-0">Index</span>
                           <div className="flex items-center gap-1 min-w-max px-2">
@@ -391,7 +407,7 @@ export default function App() {
                       </div>
 
                       <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-                        {['All Platforms', 'Genesis', 'SNES', 'N64', 'GBA', 'GBC'].map((plat) => (
+                        {['All Platforms', 'Genesis', 'SNES', 'N64', 'PSX', 'GBA', 'GBC'].map((plat) => (
                           <button
                             key={plat}
                             onClick={() => {
@@ -413,7 +429,9 @@ export default function App() {
 
                   <div className="min-h-[600px]">
                     <VirtuosoGrid
+                      ref={virtuosoRef}
                       useWindowScroll
+                      increaseViewportBy={300}
                       data={filteredGames}
                       computeItemKey={(index, game) => game.id}
                       listClassName="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6"
