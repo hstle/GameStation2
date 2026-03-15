@@ -54,10 +54,29 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onSelect, isFocused })
     <motion.div
       ref={cardRef}
       whileHover={{ y: -4, scale: 1.02 }}
-      animate={isFocused ? { y: -4, scale: 1.02, borderColor: 'rgba(16, 185, 129, 0.5)' } : { y: 0, scale: 1, borderColor: 'rgba(255, 255, 255, 0.05)' }}
+      animate={isFocused ? { 
+        y: -8, 
+        scale: 1.05, 
+        borderColor: 'rgba(16, 185, 129, 0.8)',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(16,185,129,0.2)'
+      } : { 
+        y: 0, 
+        scale: 1, 
+        borderColor: 'rgba(255, 255, 255, 0.05)',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+      }}
       onMouseEnter={() => playSound('hover')}
-      className={`bg-[#111111] border rounded-xl overflow-hidden group relative shadow-lg transition-all duration-200 ${isFocused ? 'ring-2 ring-emerald-500 shadow-emerald-500/20' : 'hover:shadow-emerald-500/10 hover:border-emerald-500/20'}`}
+      className={`bg-[#111111] border rounded-xl overflow-hidden group relative transition-all duration-300 ${isFocused ? 'ring-2 ring-emerald-500/50 z-10' : 'hover:border-emerald-500/20'}`}
     >
+      {isFocused && (
+        <motion.div
+          layoutId="focus-glow"
+          className="absolute inset-0 bg-emerald-500/5 pointer-events-none z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        />
+      )}
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={imgSrc}

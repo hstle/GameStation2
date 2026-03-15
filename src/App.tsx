@@ -67,6 +67,14 @@ export default function App() {
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const { playSound } = useRetroSound();
 
+  const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
+  const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
+
+  // Reset focus when filters change
+  useEffect(() => {
+    setFocusedIndex(-1);
+  }, [selectedPlatform, selectedCategory, selectedLetter, searchQuery]);
+
   const filteredGames = GAMES.filter(game => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesPlatform = selectedPlatform === 'All Platforms' || game.platform === selectedPlatform;
@@ -86,10 +94,11 @@ export default function App() {
   });
 
   // Gamepad Support
+  const lastButtonPressRef = useRef(0);
+  const BUTTON_COOLDOWN = 150;
+
   useEffect(() => {
     let rafId: number;
-    let lastButtonPress = 0;
-    const BUTTON_COOLDOWN = 200;
 
     const pollGamepad = () => {
       const gamepads = navigator.getGamepads();
@@ -97,36 +106,61 @@ export default function App() {
 
       if (gp && view === 'library') {
         const now = Date.now();
-        if (now - lastButtonPress > BUTTON_COOLDOWN) {
-          // D-Pad or Left Stick
-          const up = gp.buttons[12]?.pressed || gp.axes[1] < -0.5;
-          const down = gp.buttons[13]?.pressed || gp.axes[1] > 0.5;
-          const left = gp.buttons[14]?.pressed || gp.axes[0] < -0.5;
-          const right = gp.buttons[15]?.pressed || gp.axes[0] > 0.5;
-          const select = gp.buttons[0]?.pressed; // A button
+        if (now - lastButtonPressRef.current > BUTTON_COOLDOWN) {
+          const up = gp.buttons[12]?.pressed || (gp.axes[1] < -0.5 && Math.abs(gp.axes[1]) > Math.abs(gp.axes[0]));
+          const down = gp.buttons[13]?.pressed || (gp.axes[1] > 0.5 && Math.abs(gp.axes[1]) > Math.abs(gp.axes[0]));
+          const left = gp.buttons[14]?.pressed || (gp.axes[0] < -0.5 && Math.abs(gp.axes[0]) > Math.abs(gp.axes[1]));
+          const right = gp.buttons[15]?.pressed || (gp.axes[0] > 0.5 && Math.abs(gp.axes[0]) > Math.abs(gp.axes[1]));
+          const select = gp.buttons[0]?.pressed;
+          const l1 = gp.buttons[4]?.pressed;
+          const r1 = gp.buttons[5]?.pressed;
+
+          if (l1 || r1) {
+            lastButtonPressRef.current = now;
+            const currentIndex = letters.indexOf(selectedLetter);
+            let nextIndex = currentIndex;
+            if (l1) nextIndex = Math.max(0, currentIndex - 1);
+            if (r1) nextIndex = Math.min(letters.length - 1, currentIndex + 1);
+            if (nextIndex !== currentIndex) {
+              setSelectedLetter(letters[nextIndex]);
+              playSound('click');
+              setFocusedIndex(-1);
+            }
+            return;
+          }
 
           if (up || down || left || right || select) {
-            lastButtonPress = now;
-            
             if (select && focusedIndex !== -1) {
+              lastButtonPressRef.current = now;
               handleSelectGame(filteredGames[focusedIndex]);
               return;
             }
 
+            let moved = false;
             setFocusedIndex(prev => {
-              if (prev === -1) return 0;
+              if (prev === -1) {
+                moved = true;
+                return 0;
+              }
               
-              // Grid logic (assuming roughly 6 columns on desktop, 2 on mobile)
-              // We'll just do simple linear for now, or try to guess columns
               const cols = window.innerWidth >= 1280 ? 6 : window.innerWidth >= 1024 ? 5 : window.innerWidth >= 640 ? 3 : 2;
+              let next = prev;
+
+              if (right) next = Math.min(prev + 1, filteredGames.length - 1);
+              else if (left) next = Math.max(prev - 1, 0);
+              else if (down) next = Math.min(prev + cols, filteredGames.length - 1);
+              else if (up) next = Math.max(prev - cols, 0);
               
-              if (right) return Math.min(prev + 1, filteredGames.length - 1);
-              if (left) return Math.max(prev - 1, 0);
-              if (down) return Math.min(prev + cols, filteredGames.length - 1);
-              if (up) return Math.max(prev - cols, 0);
-              
-              return prev;
+              if (next !== prev) {
+                moved = true;
+                playSound('hover');
+              }
+              return next;
             });
+
+            if (moved) {
+              lastButtonPressRef.current = now;
+            }
           }
         }
       }
@@ -135,7 +169,7 @@ export default function App() {
 
     rafId = requestAnimationFrame(pollGamepad);
     return () => cancelAnimationFrame(rafId);
-  }, [view, focusedIndex, filteredGames]);
+  }, [view, focusedIndex, filteredGames, playSound, letters, selectedLetter]);
 
   const handleSelectGame = (game: Game) => {
     playSound('click');
@@ -157,9 +191,6 @@ export default function App() {
     setSearchQuery('');
     setTimeout(() => gamesGridRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
   };
-
-  const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
-  const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
@@ -336,7 +367,7 @@ export default function App() {
                     <div className="flex flex-col gap-6 w-full md:w-auto">
                       {/* Letter Filter */}
                       <div className="bg-zinc-900/30 border border-white/5 rounded-2xl p-4 w-full overflow-hidden">
-                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x">
+                        <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide touch-pan-x scroll-smooth snap-x snap-mandatory">
                           <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black mr-2 shrink-0">Index</span>
                           <div className="flex items-center gap-1 min-w-max px-2">
                             {letters.map((letter) => (
@@ -346,7 +377,7 @@ export default function App() {
                                   playSound('hover');
                                   setSelectedLetter(letter);
                                 }}
-                                className={`min-w-[36px] h-9 flex items-center justify-center rounded-lg text-[11px] font-black transition-all ${
+                                className={`min-w-[36px] h-9 flex items-center justify-center rounded-lg text-[11px] font-black transition-all snap-center ${
                                   letter === selectedLetter
                                     ? 'bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-110 z-10'
                                     : 'text-zinc-500 hover:text-white hover:bg-white/5'

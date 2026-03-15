@@ -38,7 +38,7 @@ export const GAMES: Game[] = [
     id: 'pokemon-emerald',
     title: 'Pokemon Emerald',
     thumbnail: 'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).gba',
+    romUrl: 'https://player1.eu/rom%20nintendo/Gba/d//Dead%20to%20Rights%20(Europe)%20(En,Fr,De,Es,It).gba',
     description: 'The definitive Hoenn adventure. Catch them all in this GBA classic.',
     year: '2004',
     genre: 'RPG',
@@ -466,7 +466,7 @@ export const GAMES: Game[] = [
   {
     id: 'asterix-power-gods',
     title: 'Asterix and the Power of the Gods',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Asterix%20and%20the%20Power%20of%20the%20Gods%20(Europe).png',
+    thumbnail: 'https://cdn.mobygames.com/covers/4642166-asterix-and-the-great-rescue-genesis-front-cover.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Asterix%20and%20the%20Power%20of%20the%20Gods%20(Europe).md',
     description: 'Another adventure with Asterix and Obelix.',
     year: '1995',
@@ -1215,7 +1215,7 @@ export const GAMES: Game[] = [
     id: 'disney-aladdin',
     title: 'Disney\'s Aladdin',
     thumbnail: 'https://upload.wikimedia.org/wikipedia/en/0/0d/Aladdingenesis.jpg',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation//728f559b8d51b0be0614b7bfb8d83af6c92366f6/Disneys%20Aladdin%20(USA).md',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/728f559b8d51b0be0614b7bfb8d83af6c92366f6/Disneys%20Aladdin%20(USA).md',
     description: 'The classic platformer featuring Aladdin.',
     year: '1993',
     genre: 'Platformer',
@@ -1225,7 +1225,7 @@ export const GAMES: Game[] = [
   {
     id: 'disney-jungle-book',
     title: 'Disney\'s The Jungle Book',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Disney\'s%20The%20Jungle%20Book%20(USA).png',
+    thumbnail: 'https://static.wikia.nocookie.net/sega/images/4/4d/The_Jungle_Book_Box_Art_Sega_Genesis.jpg/revision/latest?cb=20200418021312',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/19304bafe98557d9946cb767658df854927bbf42/Disneys%20The%20Jungle%20Book%20(USA).md',
     description: 'Platforming action in the jungle.',
     year: '1994',
@@ -1237,7 +1237,7 @@ export const GAMES: Game[] = [
     id: 'disney-lion-king',
     title: 'Disney\'s The Lion King',
     thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/16/The_Lion_King_Coverart.png/250px-The_Lion_King_Coverart.png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/19304bafe98557d9946cb767658df854927bbf42/Lion%20King%2C%20The%20(USA).md',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/4b4377fe39cf1e192e445aa2a011e28f5f18b812/Lion%20King%2C%20The%20(USA).md',
     description: 'Experience Simba\'s journey in this platformer.',
     year: '1994',
     genre: 'Platformer',
@@ -1248,7 +1248,7 @@ export const GAMES: Game[] = [
     id: 'double-dragon-genesis',
     title: 'Double Dragon',
     thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Double%20Dragon%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Double%20Dragon%20(USA).md',
+    romUrl: 'https://archive.org/download/nointro.md/Double%20Dragon%20%28USA%2C%20Europe%29%20%28Unl%29.7z/Double%20Dragon%20%28USA%2C%20Europe%29%20%28Unl%29.md',
     description: 'The legendary beat \'em up.',
     year: '1992',
     genre: 'Beat em up',
@@ -1259,7 +1259,7 @@ export const GAMES: Game[] = [
     id: 'double-dragon-3',
     title: 'Double Dragon III - The Sacred Stones',
     thumbnail: 'https://static.wikia.nocookie.net/sega/images/e/ee/Double_Dragon_3_-_The_Rosetta_Stone_-_%28GEN%29.jpg/revision/latest?cb=20240507010635',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Double%20Dragon%20III%20-%20The%20Sacred%20Stones%20(USA).md',
+    romUrl: 'https://archive.org/download/nointro.md/Double%20Dragon%203%20-%20The%20Arcade%20Game%20%28USA%2C%20Europe%29.7z/Double%20Dragon%203%20-%20The%20Arcade%20Game%20%28USA%2C%20Europe%29.md',
     description: 'The third entry in the Double Dragon series.',
     year: '1992',
     genre: 'Beat em up',
@@ -1588,7 +1588,7 @@ export const GAMES: Game[] = [
   {
     id: 'james-pond-2',
     title: 'James Pond 2 - Codename RoboCod',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/James%20Pond%202%20-%20Codename%20RoboCod%20(USA%2C%20Europe).png',
+    thumbnail: 'https://m.media-amazon.com/images/M/MV5BOTJkNzVkYzEtNmQzNS00Yjg5LWI0YjEtYjM0YzJlYmQ4MTRkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/James%20Pond%202%20-%20Codename%20RoboCod%20(USA%2C%20Europe).md',
     description: 'The sequel with a robotic suit.',
     year: '1991',
@@ -1775,7 +1775,7 @@ export const GAMES: Game[] = [
   {
     id: 'madden-96',
     title: 'Madden NFL \'96',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Madden%20NFL%2096%20(USA).png',
+    thumbnail: 'https://m.media-amazon.com/images/I/612cmPmD+YL._AC_UF1000,1000_QL80_.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Madden%20NFL%2096%20(USA).md',
     description: 'More football action.',
     year: '1995',
@@ -1786,7 +1786,7 @@ export const GAMES: Game[] = [
   {
     id: 'madden-97',
     title: 'Madden NFL 97',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Madden%20NFL%2097%20(USA).png',
+    thumbnail: 'https://m.media-amazon.com/images/I/61kGTFz4IrL.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Madden%20NFL%2097%20(USA).md',
     description: 'The series continues on the Genesis.',
     year: '1996',
@@ -1863,7 +1863,7 @@ export const GAMES: Game[] = [
   {
     id: 'mortal-kombat-1',
     title: 'Mortal Kombat',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Mortal%20Kombat%20(USA).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_mortal_kombat_p_qgbg1k.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Mortal%20Kombat%20(USA).md',
     description: 'The legendary fighting game with blood.',
     year: '1993',
@@ -1874,7 +1874,7 @@ export const GAMES: Game[] = [
   {
     id: 'mortal-kombat-2',
     title: 'Mortal Kombat II',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Mortal%20Kombat%20II%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/d/df/Mortal_Kombat_II_boxart.png',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Mortal%20Kombat%20II%20(USA).md',
     description: 'The massive sequel with more characters.',
     year: '1994',
@@ -1907,7 +1907,7 @@ export const GAMES: Game[] = [
   {
     id: 'ms-pacman-genesis',
     title: 'Ms. Pac-Man',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Ms.%20Pac-Man%20(USA).png',
+    thumbnail: 'https://www.retroguerrilla.com/cdn/shop/files/IMG-0772.jpg?v=1727054302',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Ms.%20Pac-Man%20(USA).md',
     description: 'Classic arcade maze action.',
     year: '1991',
@@ -1918,7 +1918,7 @@ export const GAMES: Game[] = [
   {
     id: 'mutant-league-football',
     title: 'Mutant League Football',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Mutant%20League%20Football%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/38/Mutant_League_Football_cover.png',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Mutant%20League%20Football%20(USA).md',
     description: 'Violent football with mutants.',
     year: '1993',
@@ -1929,7 +1929,7 @@ export const GAMES: Game[] = [
   {
     id: 'mutant-league-hockey',
     title: 'Mutant League Hockey',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Mutant%20League%20Hockey%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/39/Mlhgenesis.JPG',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Mutant%20League%20Hockey%20(USA).md',
     description: 'Violent hockey with mutants.',
     year: '1994',
@@ -1951,7 +1951,7 @@ export const GAMES: Game[] = [
   {
     id: 'nba-jam-te',
     title: 'NBA Jam Tournament Edition',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/NBA%20Jam%20Tournament%20Edition%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_nba_jam_tournament_edition_p_k64sky.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/NBA%20Jam%20Tournament%20Edition%20(USA%2C%20Europe).md',
     description: 'The updated version of NBA Jam.',
     year: '1994',
@@ -2050,7 +2050,7 @@ export const GAMES: Game[] = [
   {
     id: 'phantasy-star-3',
     title: 'Phantasy Star III - Generations of Doom',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Phantasy%20Star%20III%20-%20Generations%20of%20Doom%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/c/c9/Phantasy_Star_III_box_US.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Phantasy%20Star%20III%20-%20Generations%20of%20Doom%20(USA%2C%20Europe).md',
     description: 'The third installment in the RPG series.',
     year: '1991',
@@ -2105,7 +2105,7 @@ export const GAMES: Game[] = [
   {
     id: 'quackshot-genesis',
     title: 'QuackShot Starring Donald Duck',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/QuackShot%20Starring%20Donald%20Duck%20(USA%2C%20Europe).png',
+    thumbnail: 'https://archive.org/download/quack-shot-starring-donald-duck-platform-1991-sega-genesis-megadrive/Quack_Shot_starring_Donald_Duck.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/QuackShot%20Starring%20Donald%20Duck%20(USA%2C%20Europe).md',
     description: 'Donald Duck goes on an Indiana Jones-style quest.',
     year: '1991',
@@ -2160,7 +2160,7 @@ export const GAMES: Game[] = [
   {
     id: 'road-rash-2',
     title: 'Road Rash II',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Road%20Rash%20II%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_road_rash_ii_p_r7ufpc.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Road%20Rash%20II%20(USA%2C%20Europe).md',
     description: 'The sequel with more tracks and weapons.',
     year: '1992',
@@ -2270,7 +2270,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-2-genesis',
     title: 'Sonic the Hedgehog 2',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20the%20Hedgehog%202%20(World).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/0/0c/Sonic_2_US_Cover.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20the%20Hedgehog%202%20(USA)%20(Rev-B).md',
     description: 'Sonic and Tails team up for the first time.',
     year: '1992',
@@ -2281,7 +2281,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-3-genesis',
     title: 'Sonic the Hedgehog 3',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20the%20Hedgehog%203%20(USA).png',
+    thumbnail: 'https://playclassic.games/wp-content/uploads/2019/04/Sonic-The-Hedgehog-3.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20the%20Hedgehog%203%20(USA).md',
     description: 'Sonic and Tails explore Angel Island.',
     year: '1994',
@@ -2292,7 +2292,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-knuckles',
     title: 'Sonic & Knuckles',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20%26%20Knuckles%20(World).png',
+    thumbnail: 'https://m.media-amazon.com/images/I/51Wf78G-GDL._AC_UF1000,1000_QL80_.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%20%26%20Knuckles%20(World).md',
     description: 'Play as Sonic or Knuckles in this unique title.',
     year: '1994',
@@ -2303,7 +2303,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-3-knuckles',
     title: 'Sonic 3 & Knuckles',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%203%20%26%20Knuckles%20(World).png',
+    thumbnail: 'https://m.media-amazon.com/images/M/MV5BZjAyZjZkNGItYTQ2Yi00ZjkyLTliODYtMzc0MDM0ODc5MjA5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%203%20%26%20Knuckles%20(World).md',
     description: 'The complete Sonic 3 experience.',
     year: '1994',
@@ -2325,7 +2325,7 @@ export const GAMES: Game[] = [
   {
     id: 'sonic-3d-blast',
     title: 'Sonic 3D Blast',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%203D%20Blast%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_sonic_3d_blast_p_dgqnbl.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Sonic%203D%20Blast%20(USA%2C%20Europe).md',
     description: 'An isometric Sonic adventure.',
     year: '1996',
@@ -2359,7 +2359,7 @@ export const GAMES: Game[] = [
     id: 'sor-3-genesis',
     title: 'Streets of Rage 3',
     thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Streets%20of%20Rage%203%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Streets%20of%20Rage%203%20(USA).md',
+    romUrl: 'https://archive.org/download/nointro.md/Streets%20of%20Rage%203%20%28USA%29.7z/Streets%20of%20Rage%203%20%28USA%29.md',
     description: 'The final Streets of Rage on Genesis.',
     year: '1994',
     genre: 'Beat em up',
@@ -2391,7 +2391,7 @@ export const GAMES: Game[] = [
   {
     id: 'super-hangon-genesis',
     title: 'Super Hang-On',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Super%20Hang-On%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_super_hang-on_p_0ye2ae.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Super%20Hang-On%20(USA%2C%20Europe).md',
     description: 'Arcade motorcycle racing.',
     year: '1989',
@@ -2402,7 +2402,7 @@ export const GAMES: Game[] = [
   {
     id: 'tmnt-hyperstone',
     title: 'Teenage Mutant Ninja Turtles - The Hyperstone Heist',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Teenage%20Mutant%20Ninja%20Turtles%20-%20The%20Hyperstone%20Heist%20(USA).png',
+    thumbnail: 'https://m.media-amazon.com/images/I/51GU+Rw-nzL.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Teenage%20Mutant%20Ninja%20Turtles%20-%20The%20Hyperstone%20Heist%20(USA).md',
     description: 'The Turtles bring the beat \'em up action to Genesis.',
     year: '1992',
@@ -2424,7 +2424,7 @@ export const GAMES: Game[] = [
   {
     id: 'toejam-earl-1',
     title: 'ToeJam & Earl',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/ToeJam%20%26%20Earl%20(USA%2C%20Europe).png',
+    thumbnail: 'https://m.media-amazon.com/images/M/MV5BODFhZDJmZDYtZGVlMi00YTRmLWE1YjktOTJhOGExNTJlMWYyXkEyXkFqcGc@._V1_.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/ToeJam%20%26%20Earl%20(USA%2C%20Europe).md',
     description: 'A unique and funky roguelike adventure.',
     year: '1991',
@@ -2435,7 +2435,7 @@ export const GAMES: Game[] = [
   {
     id: 'toejam-earl-2',
     title: 'ToeJam & Earl in Panic on Funkotron',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/ToeJam%20%26%20Earl%20in%20Panic%20on%20Funkotron%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/4/41/ToeJam_%26_Earl_2.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/ToeJam%20%26%20Earl%20in%20Panic%20on%20Funkotron%20(USA).md',
     description: 'The platforming sequel to the original.',
     year: '1993',
@@ -2534,7 +2534,7 @@ export const GAMES: Game[] = [
   {
     id: 'slam-masters-genesis',
     title: 'Saturday Night Slam Masters',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Saturday%20Night%20Slam%20Masters%20(USA).png',
+    thumbnail: 'https://now.estarland.com/images/products/hr/5069/013388160075.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Saturday%20Night%20Slam%20Masters%20(USA).md',
     description: 'Arcade wrestling action from Capcom.',
     year: '1994',
@@ -2710,7 +2710,7 @@ export const GAMES: Game[] = [
   {
     id: 'star-control-genesis',
     title: 'Star Control',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Star%20Control%20(USA%2C%20Europe).png',
+    thumbnail: 'https://static.wikia.nocookie.net/sega/images/0/07/Scontrol.jpg/revision/latest?cb=20101125041400',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Star%20Control%20(USA%2C%20Europe).md',
     description: 'Space combat and strategy.',
     year: '1991',
@@ -2754,7 +2754,7 @@ export const GAMES: Game[] = [
   {
     id: 'super-monaco-gp',
     title: 'Super Monaco GP',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Super%20Monaco%20GP%20(USA%2C%20Europe).png',
+    thumbnail: 'https://static.wikia.nocookie.net/sega/images/f/f4/2374597-genesis_supermonacogp_eu.jpg/revision/latest?cb=20170818194414',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Super%20Monaco%20GP%20(USA%2C%20Europe).md',
     description: 'Formula One racing simulation.',
     year: '1990',
@@ -2765,7 +2765,7 @@ export const GAMES: Game[] = [
   {
     id: 'super-off-road',
     title: 'Super Off Road',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Super%20Off%20Road%20(USA%2C%20Europe).png',
+    thumbnail: 'https://supergamestation.com/cdn/shop/files/00672CD9-B33D-4F43-984F-FEA27A7E0C89_2048x.jpg?v=1708294782',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Super%20Off%20Road%20(USA%2C%20Europe).md',
     description: 'Classic arcade off-road racing.',
     year: '1992',
@@ -2820,7 +2820,7 @@ export const GAMES: Game[] = [
   {
     id: 'tazmania-genesis',
     title: 'Taz-Mania',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Taz-Mania%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Taz-Mania_game_cover.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Taz-Mania%20(USA%2C%20Europe).md',
     description: 'Platforming action with the Tasmanian Devil.',
     year: '1992',
@@ -2842,7 +2842,7 @@ export const GAMES: Game[] = [
   {
     id: 'technoclash',
     title: 'TechnoClash',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/TechnoClash%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/37/TechnoclashNABoxArtGenesis.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/TechnoClash%20(USA).md',
     description: 'Action RPG with a mix of magic and technology.',
     year: '1993',
@@ -2919,7 +2919,7 @@ export const GAMES: Game[] = [
   {
     id: 't2-judgment-day',
     title: 'Terminator 2 - Judgment Day',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Terminator%202%20-%20Judgment%20Day%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_terminator_2_judgement_day_p_cfxpnj.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Terminator%202%20-%20Judgment%20Day%20(USA%2C%20Europe).md',
     description: 'Action platformer based on the blockbuster sequel.',
     year: '1992',
@@ -2941,7 +2941,7 @@ export const GAMES: Game[] = [
   {
     id: 'theme-park-genesis',
     title: 'Theme Park',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Theme%20Park%20(USA).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_theme_park_p_295q1e.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Theme%20Park%20(USA).md',
     description: 'Build and manage your own amusement park.',
     year: '1995',
@@ -2952,7 +2952,7 @@ export const GAMES: Game[] = [
   {
     id: 'thomas-tank-engine',
     title: 'Thomas the Tank Engine & Friends',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Thomas%20the%20Tank%20Engine%20%26%20Friends%20(USA).png',
+    thumbnail: 'https://static.wikia.nocookie.net/ttte/images/f/f9/ThomastheTankEngine%28SegaGenesis%29cover.jpg/revision/latest?cb=20230206180404',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Thomas%20the%20Tank%20Engine%20%26%20Friends%20(USA).md',
     description: 'Educational fun with Thomas and his friends.',
     year: '1993',
@@ -2996,7 +2996,7 @@ export const GAMES: Game[] = [
   {
     id: 'tinhead-genesis',
     title: 'Tinhead',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Tinhead%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Sega_Genesis_Tinhead_cover_art.jpg/250px-Sega_Genesis_Tinhead_cover_art.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Tinhead%20(USA).md',
     description: 'Quirky platformer with a metal-headed hero.',
     year: '1993',
@@ -3018,7 +3018,7 @@ export const GAMES: Game[] = [
   {
     id: 'tiny-toon-acme-all-stars',
     title: 'Tiny Toon Adventures - Acme All-Stars',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Tiny%20Toon%20Adventures%20-%20Acme%20All-Stars%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Tiny_Toon_Adventures_-_ACME_All-Stars.jpg/250px-Tiny_Toon_Adventures_-_ACME_All-Stars.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Tiny%20Toon%20Adventures%20-%20Acme%20All-Stars%20(USA).md',
     description: 'Sports compilation with the Tiny Toons cast.',
     year: '1994',
@@ -3040,7 +3040,7 @@ export const GAMES: Game[] = [
   {
     id: 'tom-jerry-frantic-antics',
     title: 'Tom and Jerry - Frantic Antics',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Tom%20and%20Jerry%20-%20Frantic%20Antics%20(USA).png',
+    thumbnail: 'https://static.wikia.nocookie.net/tomandjerry/images/a/ac/Tom_and_Jerry_Frantic_Antics.jpg/revision/latest?cb=20190822203805',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Tom%20and%20Jerry%20-%20Frantic%20Antics%20(USA).md',
     description: 'Platforming fun with the famous cat and mouse.',
     year: '1993',
@@ -3117,7 +3117,7 @@ export const GAMES: Game[] = [
   {
     id: 'true-lies-genesis',
     title: 'True Lies',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/True%20Lies%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_true_lies_p_b21w97.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/True%20Lies%20(USA%2C%20Europe).md',
     description: 'Top-down action based on the Schwarzenegger film.',
     year: '1995',
@@ -3128,7 +3128,7 @@ export const GAMES: Game[] = [
   {
     id: 'truxton-genesis',
     title: 'Truxton',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Truxton%20(USA%2C%20Europe).png',
+    thumbnail: 'https://i.ebayimg.com/images/g/nvQAAOSwyXpkzsJY/s-l400.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Truxton%20(USA%2C%20Europe).md',
     description: 'Classic vertically scrolling shooter.',
     year: '1989',
@@ -3194,7 +3194,7 @@ export const GAMES: Game[] = [
   {
     id: 'uncharted-waters-genesis',
     title: 'Uncharted Waters',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Uncharted%20Waters%20(USA).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_uncharted_waters_p_x16zlr.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Uncharted%20Waters%20(USA).md',
     description: 'Sailing and trading simulation in the Age of Discovery.',
     year: '1991',
@@ -3205,7 +3205,7 @@ export const GAMES: Game[] = [
   {
     id: 'uncharted-waters-new-horizons',
     title: 'Uncharted Waters - New Horizons',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Uncharted%20Waters%20-%20New%20Horizons%20(USA).png',
+    thumbnail: 'https://storage.googleapis.com/images.pricecharting.com/b962508b43e2c05fba1543118ad5eef980e0d072ec1c95eb1c98f95640d4f233/1600.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Uncharted%20Waters%20-%20New%20Horizons%20(USA).md',
     description: 'The expanded sequel to Uncharted Waters.',
     year: '1994',
@@ -3260,7 +3260,7 @@ export const GAMES: Game[] = [
   {
     id: 'virtual-bart-genesis',
     title: 'Virtual Bart',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Virtual%20Bart%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/c/c4/Virtual_Bart.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Virtual%20Bart%20(USA%2C%20Europe).md',
     description: 'Bart Simpson enters a virtual reality machine.',
     year: '1994',
@@ -3315,7 +3315,7 @@ export const GAMES: Game[] = [
   {
     id: 'warpspeed-genesis',
     title: 'Warpspeed',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Warpspeed%20(USA).png',
+    thumbnail: 'https://cdn11.bigcommerce.com/s-ymgqt/images/stencil/original/products/23447/52709/warp_3__61372.1673330484.jpg?c=2',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Warpspeed%20(USA).md',
     description: 'Space combat simulation.',
     year: '1992',
@@ -3370,7 +3370,7 @@ export const GAMES: Game[] = [
   {
     id: 'weaponlord-genesis',
     title: 'Weaponlord',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Weaponlord%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/30/WeaponlordSNES_boxart.JPG',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Weaponlord%20(USA).md',
     description: 'Brutal weapon-based fighting game.',
     year: '1995',
@@ -3392,7 +3392,7 @@ export const GAMES: Game[] = [
   {
     id: 'carmen-sandiego-world-genesis',
     title: 'Where in the World Is Carmen Sandiego?',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Where%20in%20the%20World%20Is%20Carmen%20Sandiego%3F%20(USA).png',
+    thumbnail: 'https://www.thevideogamecompany.com/cdn/shop/products/where-in-the-world-is-carmen-sandiego-sega-genesis-14633071610-cover-art.jpg?v=1669875099',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Where%20in%20the%20World%20Is%20Carmen%20Sandiego%3F%20(USA).md',
     description: 'Track down the world-famous thief.',
     year: '1992',
@@ -3403,7 +3403,7 @@ export const GAMES: Game[] = [
   {
     id: 'carmen-sandiego-time-genesis',
     title: 'Where in Time Is Carmen Sandiego?',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Where%20in%20Time%20Is%20Carmen%20Sandiego%3F%20(USA).png',
+    thumbnail: 'https://j2games.com/cdn/shop/products/33578_front_5ecf7ead-074e-4cbe-aece-41cd3bceaab4.jpg?v=1625088399',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Where%20in%20Time%20Is%20Carmen%20Sandiego%3F%20(USA).md',
     description: 'Chase Carmen through different historical eras.',
     year: '1992',
@@ -3458,8 +3458,8 @@ export const GAMES: Game[] = [
   {
     id: 'winter-olympics-94-genesis',
     title: 'Winter Olympic Games - Lillehammer \'94',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Winter%20Olympic%20Games%20-%20Lillehammer%20\'94%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Winter%20Olympic%20Games%20-%20Lillehammer%20\'94%20(USA).md',
+    thumbnail: 'https://m.media-amazon.com/images/I/81HiKCJTcHL._AC_UF1000,1000_QL80_.jpg',
+    romUrl: 'https://archive.org/download/nointro.md/Winter%20Olympic%20Games%20%28USA%29%20%28En%2CFr%2CDe%2CEs%2CIt%2CPt%2CSv%2CNo%29.7z/Winter%20Olympic%20Games%20%28USA%29%20%28En%2CFr%2CDe%2CEs%2CIt%2CPt%2CSv%2CNo%29.md',
     description: 'Official game of the 1994 Winter Olympics.',
     year: '1994',
     genre: 'Sports',
@@ -3469,8 +3469,8 @@ export const GAMES: Game[] = [
   {
     id: 'wiz-n-liz-genesis',
     title: 'Wiz \'n\' Liz',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Wiz%20\'n\'%20Liz%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Wiz%20\'n\'%20Liz%20(USA).md',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/8/8c/Wiz%27n%27Liz.jpg',
+    romUrl: 'https://archive.org/download/nointro.md/Wiz%20%27N%27%20Liz%20%28USA%29.7z/Wiz%20%27N%27%20Liz%20%28USA%29.md',
     description: 'Extremely fast-paced platformer.',
     year: '1993',
     genre: 'Platformer',
@@ -3513,7 +3513,7 @@ export const GAMES: Game[] = [
   {
     id: 'world-championship-soccer-genesis',
     title: 'World Championship Soccer',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20Championship%20Soccer%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/8/87/World_Championship_Soccer_Coverart.png',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20Championship%20Soccer%20(USA%2C%20Europe).md',
     description: 'Early soccer game for the Genesis.',
     year: '1989',
@@ -3535,7 +3535,7 @@ export const GAMES: Game[] = [
   {
     id: 'world-class-leader-board-genesis',
     title: 'World Class Leader Board Golf',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20Class%20Leader%20Board%20Golf%20(USA%2C%20Europe).png',
+    thumbnail: 'https://gamefaqs.gamespot.com/a/box/4/0/2/805402_front.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20Class%20Leader%20Board%20Golf%20(USA%2C%20Europe).md',
     description: 'Realistic golf simulation.',
     year: '1991',
@@ -3568,7 +3568,7 @@ export const GAMES: Game[] = [
   {
     id: 'world-of-illusion-genesis',
     title: 'World of Illusion Starring Mickey Mouse and Donald Duck',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20of%20Illusion%20Starring%20Mickey%20Mouse%20and%20Donald%20Duck%20(USA%2C%20Europe).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/9/9d/World_Of_Illusion_box_art.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20of%20Illusion%20Starring%20Mickey%20Mouse%20and%20Donald%20Duck%20(USA%2C%20Europe).md',
     description: 'Cooperative platforming with Mickey and Donald.',
     year: '1992',
@@ -3591,7 +3591,7 @@ export const GAMES: Game[] = [
     id: 'world-series-baseball-95-genesis',
     title: 'World Series Baseball \'95',
     thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20Series%20Baseball%20\'95%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20Series%20Baseball%20\'95%20(USA).md',
+    romUrl: 'https://archive.org/download/nointro.md/World%20Series%20Baseball%20%2795%20%28USA%29.7z/World%20Series%20Baseball%20%2795%20%28USA%29.md',
     description: 'Updated rosters and gameplay for \'95.',
     year: '1995',
     genre: 'Sports',
@@ -3601,7 +3601,7 @@ export const GAMES: Game[] = [
   {
     id: 'world-series-baseball-96-genesis',
     title: 'World Series Baseball \'96',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20Series%20Baseball%20\'96%20(USA).png',
+    thumbnail: 'https://archive.org/download/nointro.md/World%20Series%20Baseball%20%2796%20%28USA%29.7z/World%20Series%20Baseball%20%2796%20%28USA%29.md',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20Series%20Baseball%20\'96%20(USA).md',
     description: 'Further refinements to the baseball simulation.',
     year: '1996',
@@ -3612,8 +3612,8 @@ export const GAMES: Game[] = [
   {
     id: 'world-series-baseball-98-genesis',
     title: 'World Series Baseball \'98',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/World%20Series%20Baseball%20\'98%20(USA).png',
-    romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/World%20Series%20Baseball%20\'98%20(USA).md',
+    thumbnail: 'https://i.ebayimg.com/images/g/0Z0AAOSwzBllrU49/s-l400.png',
+    romUrl: 'https://archive.org/download/nointro.md/World%20Series%20Baseball%2098%20%28USA%29.7z/World%20Series%20Baseball%2098%20%28USA%29.md',
     description: 'The final World Series Baseball on Genesis.',
     year: '1997',
     genre: 'Sports',
@@ -3645,7 +3645,7 @@ export const GAMES: Game[] = [
   {
     id: 'wwf-raw-genesis',
     title: 'WWF Raw',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/WWF%20Raw%20(USA%2C%20Europe).png',
+    thumbnail: 'https://www.lukiegames.com/assets/images/Genesis/gen_wwf_raw_p_sxirr2.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/WWF%20Raw%20(USA%2C%20Europe).md',
     description: 'Wrestling action with the WWF superstars.',
     year: '1994',
@@ -3678,7 +3678,7 @@ export const GAMES: Game[] = [
   {
     id: 'wwf-wrestlemania-arcade-genesis',
     title: 'WWF WrestleMania - The Arcade Game',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/WWF%20WrestleMania%20-%20The%20Arcade%20Game%20(USA).png',
+    thumbnail: 'https://i.ebayimg.com/images/g/dMwAAOSw1edn81Lx/s-l1200.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/WWF%20WrestleMania%20-%20The%20Arcade%20Game%20(USA).md',
     description: 'Fast-paced arcade-style wrestling.',
     year: '1995',
@@ -3722,7 +3722,7 @@ export const GAMES: Game[] = [
   {
     id: 'zoom-genesis',
     title: 'Zoom!',
-    thumbnail: 'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Zoom!%20(USA).png',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/1/1a/Zoom%21_%28Megadrive%29_boxart.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gamestation/main/Zoom!%20(USA).md',
     description: 'Puzzle-action game with a grid-based movement.',
     year: '1990',
