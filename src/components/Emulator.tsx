@@ -15,7 +15,8 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'N64': 'n64',
   'GBA': 'gba',
   'GBC': 'gbc',
-  'NES': 'nes'
+  'NES': 'nes',
+  'PSX': 'playstation'
 };
 
 declare global {
@@ -29,6 +30,8 @@ declare global {
     EJS_onLoad: () => void;
     EJS_volume: number;
     EJS_DEBUG_XX: boolean;
+    EJS_biosUrl: string;
+    EJS_threads: boolean;
   }
 }
 
@@ -65,6 +68,11 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
       const core = PLATFORM_MAPPING[game.platform] || 'segaMD';
       
+      // PSX BIOS is often required for many games to start
+      const biosUrl = game.platform === 'PSX' 
+        ? 'https://cdn.jsdelivr.net/gh/Abdess/retroarch-phoenix-megadrive/master/bios/scph5501.bin'
+        : '';
+
       // Use a more robust pathtodata and add more config options
       const html = `
         <!DOCTYPE html>
@@ -79,12 +87,14 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
             <div id="game"></div>
             <script>
               window.onerror = function(msg, url, line, col, error) {
+                console.error('Emulator Error:', msg, error);
                 window.parent.postMessage({ type: 'EJS_ERROR', message: msg }, '*');
                 return false;
               };
 
               window.EJS_player = '#game';
               window.EJS_gameUrl = '${game.romUrl}';
+              window.EJS_gameID = '${game.id}';
               window.EJS_core = '${core}';
               window.EJS_pathtodata = 'https://cdn.emulatorjs.org/latest/data/';
               window.EJS_startOnLoaded = true;
@@ -92,12 +102,16 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_DEBUG_XX = false;
               window.EJS_mouse = false;
               window.EJS_multitap = false;
+              window.EJS_threads = true;
+              ${biosUrl ? `window.EJS_biosUrl = '${biosUrl}';` : ''}
               
               window.EJS_onGameStart = () => {
+                console.log('Game Started');
                 window.parent.postMessage({ type: 'EJS_GAME_START' }, '*');
               };
 
               window.EJS_onLoad = () => {
+                console.log('Emulator Loaded');
                 window.parent.postMessage({ type: 'EJS_LOADED' }, '*');
               };
             </script>
@@ -113,12 +127,14 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
       iframeRef.current.srcdoc = html;
     };
 
+    const loadTimeoutDuration = game.platform === 'PSX' ? 60000 : 30000; // 60s for PSX, 30s for others
+
     const loadTimeout = setTimeout(() => {
       if (isLoading && isMounted) {
-        setError('The emulator is taking too long to respond. This usually happens if the ROM file is blocked or the engine failed to initialize.');
+        setError('The emulator is taking too long to respond. PSX games are large and may take up to a minute to initialize. If this persists, the ROM link might be temporarily unavailable.');
         setIsLoading(false);
       }
-    }, 25000); // 25 second timeout
+    }, loadTimeoutDuration);
 
     const handleMessage = (event: MessageEvent) => {
       const data = event.data;
