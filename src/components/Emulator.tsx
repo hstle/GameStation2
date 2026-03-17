@@ -108,7 +108,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 window.EJS_webgl = true;
                 window.EJS_ad_url = '';
                 // PSX BIOS (SCPH5501 is highly compatible)
-                const biosUrl = 'http://api.allorigins.win/get?url=https%3A//archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
+                const biosUrl = 'https://archive.org/download/scph5501_202306/scph5501.bin';
                 window.EJS_biosUrl = '/api/v1/stream?url=' + encodeURIComponent(biosUrl);
               }
               
