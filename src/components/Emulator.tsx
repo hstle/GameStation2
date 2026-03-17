@@ -16,7 +16,7 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'GBA': 'gba',
   'GBC': 'gbc',
   'NES': 'nes',
-  'PSX': 'pcsx_rearmed'
+  'PSX': 'psx'
 };
 
 declare global {
@@ -82,13 +82,13 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
         // Extract the part after /download/
         const parts = romUrl.split('archive.org/download/');
         if (parts.length > 1) {
-          romUrl = '/archive-proxy/' + parts[1];
+          romUrl = window.location.origin + '/archive-proxy/' + parts[1];
         }
       } else if (romUrl.includes('archive.org/')) {
         // Fallback for other archive.org links
-        romUrl = `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
+        romUrl = window.location.origin + `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
       } else if (game.platform === 'PSX') {
-        romUrl = `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
+        romUrl = window.location.origin + `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
       }
       
       // Use a more robust pathtodata and add more config options
@@ -121,7 +121,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_language = 'en-US';
               window.EJS_startOnLoaded = true;
               
-              if ('${core}' === 'psx' || '${core}' === 'pcsx_rearmed') {
+              if ('${core}' === 'psx') {
                 window.EJS_threads = false;
                 window.EJS_async = true;
                 window.EJS_webgl = true;
@@ -129,7 +129,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 // PSX BIOS (SCPH5501 is highly compatible)
                 let biosUrl = 'https://archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
                 if (biosUrl.includes('archive.org/download/')) {
-                  biosUrl = '/archive-proxy/' + biosUrl.split('archive.org/download/')[1];
+                  biosUrl = window.location.origin + '/archive-proxy/' + biosUrl.split('archive.org/download/')[1];
                 }
                 window.EJS_biosUrl = biosUrl;
               }
@@ -154,8 +154,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="/api/v1/stream?url=${encodeURIComponent('https://cdn.emulatorjs.org/latest/data/loader.js')}" 
-              crossorigin="anonymous"
+              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>
           </body>
