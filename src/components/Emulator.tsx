@@ -66,11 +66,8 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
       const core = PLATFORM_MAPPING[game.platform] || 'segaMD';
       
-      // Use proxy for PSX or Archive.org to bypass CORS
-      // Improved logic to handle Archive.org ZIP sub-files
-      const romUrl = (game.platform === 'PSX' || game.romUrl.includes('archive.org'))
-        ? `/api/v1/stream?url=${encodeURIComponent(game.romUrl)}`
-        : game.romUrl;
+      // Use direct URL for ROM
+      const romUrl = game.romUrl;
       
       // Use a more robust pathtodata and add more config options
       const html = `
@@ -109,7 +106,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 window.EJS_ad_url = '';
                 // PSX BIOS (SCPH5501 is highly compatible)
                 const biosUrl = 'https://archive.org/download/scph5501_202306/scph5501.bin';
-                window.EJS_biosUrl = '/api/v1/stream?url=' + encodeURIComponent(biosUrl);
+                window.EJS_biosUrl = biosUrl;
               }
               
               window.EJS_volume = ${isMuted ? 0 : 1};
@@ -132,7 +129,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="/api/v1/stream?url=${encodeURIComponent('https://cdn.emulatorjs.org/latest/data/loader.js')}" 
+              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
               crossorigin="anonymous"
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>

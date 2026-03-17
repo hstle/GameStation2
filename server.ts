@@ -3,7 +3,6 @@ import { createServer } from 'http';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import Database from 'better-sqlite3';
-import { Readable } from 'stream';
 
 const db = new Database('games.db');
 
@@ -134,114 +133,6 @@ async function startServer() {
     } catch (error) {
       console.error('Sync failed:', error);
       res.status(500).json({ error: 'Sync failed' });
-    }
-  });
-
-  app.all('/api/v1/stream', async (req, res) => {
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type');
-      res.setHeader('Access-Control-Max-Age', '86400');
-      return res.status(204).end();
-    }
-
-    const targetUrl = req.query.url as string;
-    if (!targetUrl) return res.status(400).send('URL is required');
-
-    try {
-      const headers: Record<string, string> = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-      };
-
-      // Extract item ID for Referer if it's an Archive.org URL
-      if (targetUrl.includes('archive.org')) {
-        const match = targetUrl.match(/download\/([^\/]+)/);
-        if (match && match[1]) {
-          headers['Referer'] = `https://archive.org/details/${match[1]}`;
-        } else {
-          headers['Referer'] = 'https://archive.org/';
-        }
-      }
-      
-      if (req.headers.range) {
-        headers['Range'] = req.headers.range as string;
-      }
-
-      // Ensure the URL is properly encoded if it contains spaces or special chars
-      let fetchUrl = targetUrl;
-      try {
-        const urlObj = new URL(targetUrl);
-        fetchUrl = urlObj.toString();
-      } catch (e) {
-        // Fallback to original if URL parsing fails
-      }
-
-      console.log(`Proxying ${req.method} request to: ${fetchUrl} (Range: ${req.headers.range || 'none'})`);
-
-      const response = await fetch(fetchUrl, { 
-        method: req.method,
-        headers,
-        redirect: 'follow'
-      });
-      
-      if (!response.ok && response.status !== 206) {
-        console.error(`Proxy fetch failed for ${targetUrl}: ${response.status} ${response.statusText}`);
-      }
-
-      // Forward status code
-      res.status(response.status);
-
-      // Forward essential headers
-      const headersToForward = [
-        'content-type',
-        'content-length',
-        'content-range',
-        'accept-ranges',
-        'cache-control',
-        'last-modified',
-        'etag'
-      ];
-
-      headersToForward.forEach(h => {
-        const val = response.headers.get(h);
-        if (val) res.setHeader(h, val);
-      });
-
-      // Force content-type if missing for known extensions
-      if (!res.getHeader('Content-Type')) {
-        if (targetUrl.endsWith('.chd')) res.setHeader('Content-Type', 'application/octet-stream');
-        if (targetUrl.endsWith('.bin')) res.setHeader('Content-Type', 'application/octet-stream');
-      }
-
-      // Enable CORS and CORP for the response
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type');
-      res.setHeader('Access-Control-Expose-Headers', 'Content-Range, Content-Length, Accept-Ranges');
-      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-
-      if (response.body) {
-        // @ts-ignore - response.body is a web ReadableStream
-        Readable.fromWeb(response.body).pipe(res);
-      } else {
-        res.end();
-      }
-    } catch (error) {
-      console.error('Proxy error for URL:', targetUrl, error);
-      res.status(500).send('Proxy error');
     }
   });
 
