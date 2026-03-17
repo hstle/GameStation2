@@ -16,7 +16,7 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'GBA': 'gba',
   'GBC': 'gbc',
   'NES': 'nes',
-  'PSX': 'psx'
+  'PSX': 'pcsx_rearmed'
 };
 
 declare global {
@@ -66,6 +66,31 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
 
       const core = PLATFORM_MAPPING[game.platform] || 'segaMD';
       
+      // Use proxy for PSX or Archive.org to bypass CORS
+      let romUrl = game.romUrl;
+      
+      // If it's an allorigins URL, try to extract the original URL first
+      if (romUrl.includes('api.allorigins.win/get?url=')) {
+        const match = romUrl.match(/url=([^&]+)/);
+        if (match) {
+          romUrl = decodeURIComponent(match[1]);
+        }
+      }
+
+      // Convert archive.org URLs to use the local /archive-proxy/ rewrite
+      if (romUrl.includes('archive.org/download/')) {
+        // Extract the part after /download/
+        const parts = romUrl.split('archive.org/download/');
+        if (parts.length > 1) {
+          romUrl = '/archive-proxy/' + parts[1];
+        }
+      } else if (romUrl.includes('archive.org/')) {
+        // Fallback for other archive.org links
+        romUrl = `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
+      } else if (game.platform === 'PSX') {
+        romUrl = `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
+      }
+      
       // Use a more robust pathtodata and add more config options
       const html = `
         <!DOCTYPE html>
@@ -75,6 +100,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: black; }
               #game { width: 100%; height: 100%; }
             </style>
+            <script src="https://js.puter.com/v2/"></script>
           </head>
           <body>
             <div id="game"></div>
@@ -84,16 +110,41 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 return false;
               };
 
+              // Puter.js can be used here if needed for custom fetching
+              // but EmulatorJS handles its own fetching. 
+              // We use the server-side proxy for the main ROM.
+
               window.EJS_player = '#game';
-              window.EJS_gameUrl = '${game.romUrl}';
+              window.EJS_gameUrl = '${romUrl}';
               window.EJS_core = '${core}';
               window.EJS_pathtodata = 'https://cdn.emulatorjs.org/latest/data/';
+              window.EJS_language = 'en-US';
               window.EJS_startOnLoaded = true;
+              
+              if ('${core}' === 'psx' || '${core}' === 'pcsx_rearmed') {
+                window.EJS_threads = false;
+                window.EJS_async = true;
+                window.EJS_webgl = true;
+                window.EJS_ad_url = '';
+                // PSX BIOS (SCPH5501 is highly compatible)
+                let biosUrl = 'https://archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
+                if (biosUrl.includes('archive.org/download/')) {
+                  biosUrl = '/archive-proxy/' + biosUrl.split('archive.org/download/')[1];
+                }
+                window.EJS_biosUrl = biosUrl;
+              }
+              
               window.EJS_volume = ${isMuted ? 0 : 1};
-              window.EJS_DEBUG_XX = false;
+              window.EJS_DEBUG_XX = true;
               window.EJS_mouse = false;
               window.EJS_multitap = false;
               
+              const originalLog = console.log;
+              console.log = function(...args) {
+                window.parent.postMessage({ type: 'EJS_LOG', message: args.join(' ') }, '*');
+                originalLog.apply(console, args);
+              };
+
               window.EJS_onGameStart = () => {
                 window.parent.postMessage({ type: 'EJS_GAME_START' }, '*');
               };
@@ -103,7 +154,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
+              src="/api/v1/stream?url=${encodeURIComponent('https://cdn.emulatorjs.org/latest/data/loader.js')}" 
               crossorigin="anonymous"
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>
@@ -131,6 +182,8 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
             if (isMounted) setIsLoading(false);
           }, 500);
         }
+      } else if (data.type === 'EJS_LOG') {
+        console.log('Emulator Engine:', data.message);
       } else if (data.type === 'EJS_LOADED') {
         if (isMounted) {
           setLoadingStep(prev => Math.max(prev, 4)); // Move to "Preparing Video Driver" step
@@ -321,7 +374,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                         </li>
                         <li className="flex gap-3 text-xs text-zinc-400">
                           <span className="flex-shrink-0 w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white">2</span>
-                          <span>Disable any ad-blockers or privacy extensions that might be blocking the emulator scripts or ROM download.</span>
+                          <span>Disable any ad-blockers or privacy extensions (like uBlock Origin or Brave Shields) that might be blocking the emulator scripts or ROM stream.</span>
                         </li>
                         <li className="flex gap-3 text-xs text-zinc-400">
                           <span className="flex-shrink-0 w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white">3</span>

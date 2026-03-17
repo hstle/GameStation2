@@ -1,340 +1,349 @@
-sonic-1
-mario-world
-mario-64
-pokemon-emerald
-zelda-dx
-sor-1
-sor-2
-batman-robin
-alien-soldier
-altered-beast
-animaniacs
-688-attack-sub
-atp-tennis
-real-monsters
-addams-family
-aero-acrobat
-arcus-odyssey
-arrow-flash
-art-of-fighting
-asterix-rescue
-atomic-runner
-super-monaco-gp-2
-bob-genesis
-ballz-3d
-batman-video-game
-batman-returns
-battle-master
-battletech
-battletoads-double-dragon
-battletoads-genesis
-beavis-butthead
-beyond-oasis
-aero-acrobat-2
-aerobiz
-aerobiz-supersonic
-after-burner-2
-air-buster
-air-diver
-alex-kidd-enchanted-castle
-alien-3
-alien-storm-genesis
-alisia-dragoon-genesis
-asterix-power-gods
-bass-masters-classic
-berenstain-bears
-bill-walsh-football
-bill-walsh-football-95
-bimini-run
-bio-hazard-battle
-blades-vengeance
-blaster-master-2
-bloodshot
-bonanza-bros
-boogerman
-boxing-legends
-bram-stokers-dracula
-brian-lara-cricket
-brian-lara-cricket-96
-brutal-paws-fury
-bubba-n-stix
-bubble-squeak
-bubsy-2
-bubsy-claws
-buck-rogers
-bugs-bunny-double-trouble
-bulls-v-blazers
-bulls-v-lakers
-burning-force
-cadash
-cannon-fodder
-captain-america-avengers
-castle-illusion
-castlevania-bloodlines
-centurion
-chakan
-champions-soccer
-championship-bowling
-championship-pro-am
-chase-hq-2
-cheese-cat-astrophe
-chiki-chiki-boys
-chuck-rock
-chuck-rock-2
-clayfighter
-coach-k-basketball
-college-football-96
-college-football-97
-college-football-national-championship
-college-football-national-championship-2
-college-slam
-columns-genesis
-columns-3
-combat-cars
-comix-zone-genesis
-contra-hard-corps
-cool-spot-genesis
-cosmic-spacehead
-crack-down
-crue-ball
-crusader-centy
-cyborg-justice
-darius-genesis
-dashin-desperadoes
-davis-cup-tennis
-daze-before-christmas
-death-return-superman
-decap-attack
-desert-strike
-dick-tracy
-dino-land
-disney-aladdin
-disney-jungle-book
-disney-lion-king
-double-dragon-genesis
-double-dragon-3
-dr-robotnik-mean-bean-machine
-dynamite-headdy
-earthworm-jim
-earthworm-jim-2
-ecco-the-dolphin
-ecco-tides-of-time
-eternal-champions
-fatal-fury
-fifa-international-soccer
-fifa-soccer-95
-fifa-soccer-96
-fifa-soccer-97
-flashback-genesis
-flicky-genesis
-forgotten-worlds-genesis
-frogger-genesis
-gaiares-genesis
-gargoyles-genesis
-gauntlet-4
-general-chaos
-ghouls-n-ghosts-genesis
-golden-axe-genesis
-golden-axe-2
-gunstar-heroes-genesis
-haunting-polterguy
-hellfire-genesis
-herzog-zwei
-hook-genesis
-james-pond-1
-james-pond-2
-james-pond-3
-jewel-master
-joe-mac-genesis
-judge-dredd-genesis
-jungle-strike
-jurassic-park-genesis
-jurassic-park-rampage
-kid-chameleon
-king-of-monsters
-landstalker-genesis
-lethal-enforcers
-light-crusader
-lost-vikings-genesis
-lotus-turbo-challenge
-madden-94
-madden-95
-madden-96
-madden-97
-madden-98
-mega-bomberman
-mega-turrican
-mercs-genesis
-moonwalker-genesis
-micro-machines-1
-mortal-kombat-1
-mortal-kombat-2
-mortal-kombat-3
-umk3-genesis
-ms-pacman-genesis
-mutant-league-football
-mutant-league-hockey
-nba-jam-genesis
-nba-jam-te
-nba-live-95
-nba-live-96
-nba-live-97
-nba-live-98
-nhl-94
-nhl-95
-outrun-genesis
-phantasy-star-2
-phantasy-star-3
-phantasy-star-4
-pitfall-mayan
-pulseman-genesis
-punisher-genesis
-quackshot-genesis
-ranger-x-genesis
-revenge-shinobi
-ristar-genesis
-road-rash-1
-road-rash-2
-road-rash-3
-rocket-knight
-samurai-shodown-genesis
-shadow-dancer-genesis
-shadowrun-genesis
-shining-force-1
-shining-force-2
-shining-darkness
-shinobi-3
-sonic-2-genesis
-sonic-3-genesis
-sonic-knuckles
-sonic-3-knuckles
-sonic-spinball
-sonic-3d-blast
-sf2-sce
-ssf2-genesis
-sor-3-genesis
-strider-genesis
-sunset-riders-genesis
-super-hangon-genesis
-tmnt-hyperstone
-thunder-force-4
-toejam-earl-1
-toejam-earl-2
-vectorman-1
-vectorman-2
-virtua-fighter-2-genesis
-virtua-racing-genesis
-xmen-1-genesis
-xmen-2-genesis
-zombies-ate-my-neighbors-genesis
-sagaia-genesis
-slam-masters-genesis
-scooby-doo-genesis
-seaquest-genesis
-shadow-beast-1
-shadow-beast-2
-side-pocket-genesis
-skitchin-genesis
-slaughter-sport
-sol-deace
-soldiers-of-fortune
-space-harrier-2
-sparkster-genesis
-speedball-2
-spiderman-genesis
-splatterhouse-2
-splatterhouse-3
-star-control-genesis
-stargate-genesis
-steel-empire-genesis
-sub-terrania
-super-monaco-gp
-super-off-road
-sword-vermilion
-syndicate-genesis
-t2-arcade-genesis
-talespin-genesis
-tazmania-genesis
-tmnt-fighters
-technoclash
-tecmo-super-bowl
-tecmo-super-bowl-ii
-tecmo-super-bowl-iii
-tecmo-super-hockey
-tecmo-super-nba-basketball
-terminator-genesis
-t2-judgment-day
-test-drive-ii
-theme-park-genesis
-thomas-tank-engine
-thunder-force-ii
-thunder-force-iii
-tick-genesis
-tinhead-genesis
-tiny-toon-busters-treasure
-tiny-toon-acme-all-stars
-toki-ape-spit
-tom-jerry-frantic-antics
-top-gear-2-genesis
-toughman-contest
-toxic-crusaders-genesis
-toy-story-genesis
-trampoline-terror
-traysia-genesis
-true-lies-genesis
-truxton-genesis
-turrican-genesis
-twin-cobra-genesis
-two-crude-dudes
-tyrants-fight-time
-universal-soldier-genesis
-uncharted-waters-genesis
-uncharted-waters-new-horizons
-urban-strike-genesis
-valis-genesis
-valis-iii-genesis
-vapor-trail-genesis
-virtual-bart-genesis
-virtual-pinball-genesis
-wani-wani-world-genesis
-wardner-genesis
-warlock-genesis
-warpspeed-genesis
-warrior-of-rome-genesis
-warrior-of-rome-ii-genesis
-warsong-genesis
-waynes-world-genesis
-weaponlord-genesis
-wheel-fortune-genesis
-carmen-sandiego-world-genesis
-carmen-sandiego-time-genesis
-whip-rush-genesis
-williams-arcade-hits-genesis
-wings-of-wor-genesis
-winter-challenge-genesis
-winter-olympics-94-genesis
-wiz-n-liz-genesis
-wolfchild-genesis
-wolverine-adamantium-rage-genesis
-wonder-boy-monster-world-genesis
-world-championship-soccer-genesis
-world-championship-soccer-ii-genesis
-world-class-leader-board-genesis
-world-cup-usa-94-genesis
-world-heroes-genesis
-world-of-illusion-genesis
-world-series-baseball-genesis
-world-series-baseball-95-genesis
-world-series-baseball-96-genesis
-world-series-baseball-98-genesis
-worms-genesis
-wrestle-war-genesis
-wwf-raw-genesis
-wwf-royal-rumble-genesis
-wwf-super-wrestlemania-genesis
-wwf-wrestlemania-arcade-genesis
-zero-tolerance-genesis
-zero-kamikaze-squirrel-genesis
-zoop-genesis
-zoom-genesis
-zool-genesis
+    id: 'sonic-1',
+    id: 'mario-world',
+    id: 'mario-64',
+    id: 'pokemon-emerald',
+    id: 'zelda-dx',
+    id: 'sor-1',
+    id: 'sor-2',
+    id: 'batman-robin',
+    id: 'alien-soldier',
+    id: 'altered-beast',
+    id: 'animaniacs',
+    id: '688-attack-sub',
+    id: 'atp-tennis',
+    id: 'real-monsters',
+    id: 'addams-family',
+    id: 'aero-acrobat',
+    id: 'arcus-odyssey',
+    id: 'arrow-flash',
+    id: 'art-of-fighting',
+    id: 'asterix-rescue',
+    id: 'atomic-runner',
+    id: 'super-monaco-gp-2',
+    id: 'bob-genesis',
+    id: 'ballz-3d',
+    id: 'batman-video-game',
+    id: 'batman-returns',
+    id: 'battle-master',
+    id: 'battletech',
+    id: 'battletoads-double-dragon',
+    id: 'battletoads-genesis',
+    id: 'beavis-butthead',
+    id: 'beyond-oasis',
+    id: 'aero-acrobat-2',
+    id: 'aerobiz',
+    id: 'aerobiz-supersonic',
+    id: 'after-burner-2',
+    id: 'air-buster',
+    id: 'air-diver',
+    id: 'alex-kidd-enchanted-castle',
+    id: 'alien-3',
+    id: 'alien-storm-genesis',
+    id: 'alisia-dragoon-genesis',
+    id: 'asterix-power-gods',
+    id: 'bass-masters-classic',
+    id: 'berenstain-bears',
+    id: 'bill-walsh-football',
+    id: 'bill-walsh-football-95',
+    id: 'bimini-run',
+    id: 'bio-hazard-battle',
+    id: 'blades-vengeance',
+    id: 'blaster-master-2',
+    id: 'bloodshot',
+    id: 'bonanza-bros',
+    id: 'boogerman',
+    id: 'boxing-legends',
+    id: 'bram-stokers-dracula',
+    id: 'brian-lara-cricket',
+    id: 'brian-lara-cricket-96',
+    id: 'brutal-paws-fury',
+    id: 'bubba-n-stix',
+    id: 'bubble-squeak',
+    id: 'bubsy-2',
+    id: 'bubsy-claws',
+    id: 'buck-rogers',
+    id: 'bugs-bunny-double-trouble',
+    id: 'bulls-v-blazers',
+    id: 'bulls-v-lakers',
+    id: 'burning-force',
+    id: 'cadash',
+    id: 'cannon-fodder',
+    id: 'captain-america-avengers',
+    id: 'castle-illusion',
+    id: 'castlevania-bloodlines',
+    id: 'centurion',
+    id: 'chakan',
+    id: 'champions-soccer',
+    id: 'championship-bowling',
+    id: 'championship-pro-am',
+    id: 'chase-hq-2',
+    id: 'cheese-cat-astrophe',
+    id: 'chiki-chiki-boys',
+    id: 'chuck-rock',
+    id: 'chuck-rock-2',
+    id: 'clayfighter',
+    id: 'coach-k-basketball',
+    id: 'college-football-96',
+    id: 'college-football-97',
+    id: 'college-football-national-championship',
+    id: 'college-football-national-championship-2',
+    id: 'college-slam',
+    id: 'columns-genesis',
+    id: 'columns-3',
+    id: 'combat-cars',
+    id: 'comix-zone-genesis',
+    id: 'contra-hard-corps',
+    id: 'cool-spot-genesis',
+    id: 'cosmic-spacehead',
+    id: 'crack-down',
+    id: 'crue-ball',
+    id: 'crusader-centy',
+    id: 'cyborg-justice',
+    id: 'darius-genesis',
+    id: 'dashin-desperadoes',
+    id: 'davis-cup-tennis',
+    id: 'daze-before-christmas',
+    id: 'death-return-superman',
+    id: 'decap-attack',
+    id: 'desert-strike',
+    id: 'dick-tracy',
+    id: 'dino-land',
+    id: 'disney-aladdin',
+    id: 'disney-jungle-book',
+    id: 'disney-lion-king',
+    id: 'double-dragon-genesis',
+    id: 'double-dragon-3',
+    id: 'dr-robotnik-mean-bean-machine',
+    id: 'dynamite-headdy',
+    id: 'earthworm-jim',
+    id: 'earthworm-jim-2',
+    id: 'ecco-the-dolphin',
+    id: 'ecco-tides-of-time',
+    id: 'eternal-champions',
+    id: 'fatal-fury',
+    id: 'fifa-international-soccer',
+    id: 'fifa-soccer-95',
+    id: 'fifa-soccer-96',
+    id: 'fifa-soccer-97',
+    id: 'flashback-genesis',
+    id: 'flicky-genesis',
+    id: 'forgotten-worlds-genesis',
+    id: 'frogger-genesis',
+    id: 'gaiares-genesis',
+    id: 'gargoyles-genesis',
+    id: 'gauntlet-4',
+    id: 'general-chaos',
+    id: 'ghouls-n-ghosts-genesis',
+    id: 'golden-axe-genesis',
+    id: 'golden-axe-2',
+    id: 'gunstar-heroes-genesis',
+    id: 'haunting-polterguy',
+    id: 'hellfire-genesis',
+    id: 'herzog-zwei',
+    id: 'hook-genesis',
+    id: 'james-pond-1',
+    id: 'james-pond-2',
+    id: 'james-pond-3',
+    id: 'jewel-master',
+    id: 'joe-mac-genesis',
+    id: 'judge-dredd-genesis',
+    id: 'jungle-strike',
+    id: 'jurassic-park-genesis',
+    id: 'jurassic-park-rampage',
+    id: 'kid-chameleon',
+    id: 'king-of-monsters',
+    id: 'landstalker-genesis',
+    id: 'lethal-enforcers',
+    id: 'light-crusader',
+    id: 'lost-vikings-genesis',
+    id: 'lotus-turbo-challenge',
+    id: 'madden-94',
+    id: 'madden-95',
+    id: 'madden-96',
+    id: 'madden-97',
+    id: 'madden-98',
+    id: 'mega-bomberman',
+    id: 'mega-turrican',
+    id: 'mercs-genesis',
+    id: 'moonwalker-genesis',
+    id: 'micro-machines-1',
+    id: 'mortal-kombat-1',
+    id: 'mortal-kombat-2',
+    id: 'mortal-kombat-3',
+    id: 'umk3-genesis',
+    id: 'ms-pacman-genesis',
+    id: 'mutant-league-football',
+    id: 'mutant-league-hockey',
+    id: 'nba-jam-genesis',
+    id: 'nba-jam-te',
+    id: 'nba-live-95',
+    id: 'nba-live-96',
+    id: 'nba-live-97',
+    id: 'nba-live-98',
+    id: 'nhl-94',
+    id: 'nhl-95',
+    id: 'outrun-genesis',
+    id: 'phantasy-star-2',
+    id: 'phantasy-star-3',
+    id: 'phantasy-star-4',
+    id: 'pitfall-mayan',
+    id: 'pulseman-genesis',
+    id: 'punisher-genesis',
+    id: 'quackshot-genesis',
+    id: 'ranger-x-genesis',
+    id: 'revenge-shinobi',
+    id: 'ristar-genesis',
+    id: 'road-rash-1',
+    id: 'road-rash-2',
+    id: 'road-rash-3',
+    id: 'rocket-knight',
+    id: 'samurai-shodown-genesis',
+    id: 'shadow-dancer-genesis',
+    id: 'shadowrun-genesis',
+    id: 'shining-force-1',
+    id: 'shining-force-2',
+    id: 'shining-darkness',
+    id: 'shinobi-3',
+    id: 'sonic-2-genesis',
+    id: 'sonic-3-genesis',
+    id: 'sonic-knuckles',
+    id: 'sonic-3-knuckles',
+    id: 'sonic-spinball',
+    id: 'sonic-3d-blast',
+    id: 'sf2-sce',
+    id: 'ssf2-genesis',
+    id: 'sor-3-genesis',
+    id: 'strider-genesis',
+    id: 'sunset-riders-genesis',
+    id: 'super-hangon-genesis',
+    id: 'tmnt-hyperstone',
+    id: 'thunder-force-4',
+    id: 'toejam-earl-1',
+    id: 'toejam-earl-2',
+    id: 'vectorman-1',
+    id: 'vectorman-2',
+    id: 'virtua-fighter-2-genesis',
+    id: 'virtua-racing-genesis',
+    id: 'xmen-1-genesis',
+    id: 'xmen-2-genesis',
+    id: 'zombies-ate-my-neighbors-genesis',
+    id: 'sagaia-genesis',
+    id: 'slam-masters-genesis',
+    id: 'scooby-doo-genesis',
+    id: 'seaquest-genesis',
+    id: 'shadow-beast-1',
+    id: 'shadow-beast-2',
+    id: 'side-pocket-genesis',
+    id: 'skitchin-genesis',
+    id: 'slaughter-sport',
+    id: 'sol-deace',
+    id: 'soldiers-of-fortune',
+    id: 'space-harrier-2',
+    id: 'sparkster-genesis',
+    id: 'speedball-2',
+    id: 'spiderman-genesis',
+    id: 'splatterhouse-2',
+    id: 'splatterhouse-3',
+    id: 'star-control-genesis',
+    id: 'stargate-genesis',
+    id: 'steel-empire-genesis',
+    id: 'sub-terrania',
+    id: 'super-monaco-gp',
+    id: 'super-off-road',
+    id: 'sword-vermilion',
+    id: 'syndicate-genesis',
+    id: 't2-arcade-genesis',
+    id: 'talespin-genesis',
+    id: 'tazmania-genesis',
+    id: 'tmnt-fighters',
+    id: 'technoclash',
+    id: 'tecmo-super-bowl',
+    id: 'tecmo-super-bowl-ii',
+    id: 'tecmo-super-bowl-iii',
+    id: 'tecmo-super-hockey',
+    id: 'tecmo-super-nba-basketball',
+    id: 'terminator-genesis',
+    id: 't2-judgment-day',
+    id: 'test-drive-ii',
+    id: 'theme-park-genesis',
+    id: 'thomas-tank-engine',
+    id: 'thunder-force-ii',
+    id: 'thunder-force-iii',
+    id: 'tick-genesis',
+    id: 'tinhead-genesis',
+    id: 'tiny-toon-busters-treasure',
+    id: 'tiny-toon-acme-all-stars',
+    id: 'toki-ape-spit',
+    id: 'tom-jerry-frantic-antics',
+    id: 'top-gear-2-genesis',
+    id: 'toughman-contest',
+    id: 'toxic-crusaders-genesis',
+    id: 'toy-story-genesis',
+    id: 'trampoline-terror',
+    id: 'traysia-genesis',
+    id: 'true-lies-genesis',
+    id: 'truxton-genesis',
+    id: 'turrican-genesis',
+    id: 'twin-cobra-genesis',
+    id: 'two-crude-dudes',
+    id: 'tyrants-fight-time',
+    id: 'universal-soldier-genesis',
+    id: 'uncharted-waters-genesis',
+    id: 'uncharted-waters-new-horizons',
+    id: 'urban-strike-genesis',
+    id: 'valis-genesis',
+    id: 'valis-iii-genesis',
+    id: 'vapor-trail-genesis',
+    id: 'virtual-bart-genesis',
+    id: 'virtual-pinball-genesis',
+    id: 'wani-wani-world-genesis',
+    id: 'wardner-genesis',
+    id: 'warlock-genesis',
+    id: 'warpspeed-genesis',
+    id: 'warrior-of-rome-genesis',
+    id: 'warrior-of-rome-ii-genesis',
+    id: 'warsong-genesis',
+    id: 'waynes-world-genesis',
+    id: 'weaponlord-genesis',
+    id: 'wheel-fortune-genesis',
+    id: 'carmen-sandiego-world-genesis',
+    id: 'carmen-sandiego-time-genesis',
+    id: 'whip-rush-genesis',
+    id: 'williams-arcade-hits-genesis',
+    id: 'wings-of-wor-genesis',
+    id: 'winter-challenge-genesis',
+    id: 'winter-olympics-94-genesis',
+    id: 'wiz-n-liz-genesis',
+    id: 'wolfchild-genesis',
+    id: 'wolverine-adamantium-rage-genesis',
+    id: 'wonder-boy-monster-world-genesis',
+    id: 'world-championship-soccer-genesis',
+    id: 'world-championship-soccer-ii-genesis',
+    id: 'world-class-leader-board-genesis',
+    id: 'world-cup-usa-94-genesis',
+    id: 'world-heroes-genesis',
+    id: 'world-of-illusion-genesis',
+    id: 'world-series-baseball-genesis',
+    id: 'world-series-baseball-95-genesis',
+    id: 'world-series-baseball-96-genesis',
+    id: 'world-series-baseball-98-genesis',
+    id: 'worms-genesis',
+    id: 'wrestle-war-genesis',
+    id: 'wwf-raw-genesis',
+    id: 'wwf-royal-rumble-genesis',
+    id: 'wwf-super-wrestlemania-genesis',
+    id: 'wwf-wrestlemania-arcade-genesis',
+    id: 'zero-tolerance-genesis',
+    id: 'zero-kamikaze-squirrel-genesis',
+    id: 'zoop-genesis',
+    id: 'zoom-genesis',
+    id: 'zool-genesis',
+    id: 'castlevania-sotn',
+    id: 'metal-gear-solid',
+    id: 'resident-evil-2',
+    id: 'crash-bandicoot',
+    id: 'tekken-3',
+    id: 'ffvii',
+    id: 'silent-hill',
+    id: 'spyro',
+    id: 'thps2',
