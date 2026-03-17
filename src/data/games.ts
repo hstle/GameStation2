@@ -3767,7 +3767,7 @@ export const GAMES: Game[] = [
     id: 'metal-gear-solid',
     title: 'Metal Gear Solid',
     thumbnail: 'https://upload.wikimedia.org/wikipedia/en/3/33/Metal_Gear_Solid_cover_art.png',
-    romUrl: 'https://archive.org/download/chd_psx/CHD-PSX-USA/Metal%20Gear%20Solid%20(USA)%20(Disc%201).chd',
+    romUrl: 'http://api.allorigins.win/get?url=https%3A//archive.org/download/chd_psx/CHD-PSX-USA/Metal%2520Gear%2520Solid%2520%2528USA%2529%2520%2528Disc%25201%2529.chd',
     description: 'Tactical Espionage Action. Solid Snake must infiltrate Shadow Moses to stop a nuclear threat.',
     year: '1998',
     genre: 'Stealth',

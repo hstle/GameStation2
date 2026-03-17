@@ -16,7 +16,7 @@ const PLATFORM_MAPPING: Record<string, string> = {
   'GBA': 'gba',
   'GBC': 'gbc',
   'NES': 'nes',
-  'PSX': 'psx'
+  'PSX': 'pcsx_rearmed'
 };
 
 declare global {
@@ -67,29 +67,10 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
       const core = PLATFORM_MAPPING[game.platform] || 'segaMD';
       
       // Use proxy for PSX or Archive.org to bypass CORS
-      let romUrl = game.romUrl;
-      
-      // If it's an allorigins URL, try to extract the original URL first
-      if (romUrl.includes('api.allorigins.win/get?url=')) {
-        const match = romUrl.match(/url=([^&]+)/);
-        if (match) {
-          romUrl = decodeURIComponent(match[1]);
-        }
-      }
-
-      // Convert archive.org URLs to use the local /archive-proxy/ rewrite
-      if (romUrl.includes('archive.org/download/')) {
-        // Extract the part after /download/
-        const parts = romUrl.split('archive.org/download/');
-        if (parts.length > 1) {
-          romUrl = window.location.origin + '/archive-proxy/' + parts[1];
-        }
-      } else if (romUrl.includes('archive.org/')) {
-        // Fallback for other archive.org links
-        romUrl = window.location.origin + `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
-      } else if (game.platform === 'PSX') {
-        romUrl = window.location.origin + `/api/v1/stream?url=${encodeURIComponent(romUrl)}`;
-      }
+      // Improved logic to handle Archive.org ZIP sub-files
+      const romUrl = (game.platform === 'PSX' || game.romUrl.includes('archive.org'))
+        ? `/api/v1/stream?url=${encodeURIComponent(game.romUrl)}`
+        : game.romUrl;
       
       // Use a more robust pathtodata and add more config options
       const html = `
@@ -121,17 +102,14 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_language = 'en-US';
               window.EJS_startOnLoaded = true;
               
-              if ('${core}' === 'psx') {
+              if ('${core}' === 'psx' || '${core}' === 'pcsx_rearmed') {
                 window.EJS_threads = false;
                 window.EJS_async = true;
                 window.EJS_webgl = true;
                 window.EJS_ad_url = '';
                 // PSX BIOS (SCPH5501 is highly compatible)
-                let biosUrl = 'https://archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
-                if (biosUrl.includes('archive.org/download/')) {
-                  biosUrl = window.location.origin + '/archive-proxy/' + biosUrl.split('archive.org/download/')[1];
-                }
-                window.EJS_biosUrl = biosUrl;
+                const biosUrl = 'http://api.allorigins.win/get?url=https%3A//archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
+                window.EJS_biosUrl = '/api/v1/stream?url=' + encodeURIComponent(biosUrl);
               }
               
               window.EJS_volume = ${isMuted ? 0 : 1};
@@ -154,7 +132,8 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
+              src="/api/v1/stream?url=${encodeURIComponent('https://cdn.emulatorjs.org/latest/data/loader.js')}" 
+              crossorigin="anonymous"
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>
           </body>

@@ -44,22 +44,6 @@ if (count.count === 0) {
 async function startServer() {
   const app = express();
   app.use(express.json());
-
-  // Global CORS and Security Headers
-  app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Range, Accept-Ranges, If-None-Match');
-    res.setHeader('Access-Control-Expose-Headers', 'Content-Range, Content-Length, Accept-Ranges');
-    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-    
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-      return res.status(204).end();
-    }
-    next();
-  });
-
   const httpServer = createServer(app);
   const PORT = 3000;
 
@@ -153,23 +137,31 @@ async function startServer() {
     }
   });
 
-  // Helper for proxying requests
-  const proxyRequest = async (targetUrl: string, req: express.Request, res: express.Response) => {
+  app.all('/api/v1/stream', async (req, res) => {
     // Handle preflight
     if (req.method === 'OPTIONS') {
       res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type, Accept-Ranges, If-None-Match');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type');
       res.setHeader('Access-Control-Max-Age', '86400');
       return res.status(204).end();
     }
 
+    const targetUrl = req.query.url as string;
+    if (!targetUrl) return res.status(400).send('URL is required');
+
     try {
       const headers: Record<string, string> = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Accept': '*/*',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
         'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
         'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-User': '?1',
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache',
       };
@@ -188,14 +180,16 @@ async function startServer() {
         headers['Range'] = req.headers.range as string;
       }
 
-      // Ensure the URL is properly encoded
+      // Ensure the URL is properly encoded if it contains spaces or special chars
       let fetchUrl = targetUrl;
       try {
         const urlObj = new URL(targetUrl);
         fetchUrl = urlObj.toString();
-      } catch (e) {}
+      } catch (e) {
+        // Fallback to original if URL parsing fails
+      }
 
-      console.log(`Proxying ${req.method} to: ${fetchUrl} (Range: ${req.headers.range || 'none'})`);
+      console.log(`Proxying ${req.method} request to: ${fetchUrl} (Range: ${req.headers.range || 'none'})`);
 
       const response = await fetch(fetchUrl, { 
         method: req.method,
@@ -203,6 +197,10 @@ async function startServer() {
         redirect: 'follow'
       });
       
+      if (!response.ok && response.status !== 206) {
+        console.error(`Proxy fetch failed for ${targetUrl}: ${response.status} ${response.statusText}`);
+      }
+
       // Forward status code
       res.status(response.status);
 
@@ -224,14 +222,14 @@ async function startServer() {
 
       // Force content-type if missing for known extensions
       if (!res.getHeader('Content-Type')) {
-        if (targetUrl.toLowerCase().endsWith('.chd')) res.setHeader('Content-Type', 'application/octet-stream');
-        if (targetUrl.toLowerCase().endsWith('.bin')) res.setHeader('Content-Type', 'application/octet-stream');
+        if (targetUrl.endsWith('.chd')) res.setHeader('Content-Type', 'application/octet-stream');
+        if (targetUrl.endsWith('.bin')) res.setHeader('Content-Type', 'application/octet-stream');
       }
 
       // Enable CORS and CORP for the response
       res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type, Accept-Ranges, If-None-Match');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type');
       res.setHeader('Access-Control-Expose-Headers', 'Content-Range, Content-Length, Accept-Ranges');
       res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
 
@@ -245,23 +243,7 @@ async function startServer() {
       console.error('Proxy error for URL:', targetUrl, error);
       res.status(500).send('Proxy error');
     }
-  };
-
-  app.all('/archive-proxy/*', async (req, res) => {
-    // Use originalUrl to preserve encoding of the path
-    const pathPart = req.originalUrl.split('/archive-proxy/')[1];
-    if (!pathPart) return res.status(400).send('Path is required');
-    
-    const targetUrl = `https://archive.org/download/${pathPart}`;
-    await proxyRequest(targetUrl, req, res);
   });
-
-  app.all('/api/v1/stream', async (req, res) => {
-    const targetUrl = req.query.url as string;
-    if (!targetUrl) return res.status(400).send('URL is required');
-    await proxyRequest(targetUrl, req, res);
-  });
-
 
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
