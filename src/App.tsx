@@ -71,6 +71,8 @@ export default function App() {
   const categories = ['All Categories', ...new Set(GAMES.map(g => g.category))].sort();
   const letters = ['All', '#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
+  const platforms = ['All Platforms', 'Genesis', 'SNES', 'N64', 'PSX', 'GBA', 'GBC'];
+
   // Reset focus when filters change
   useEffect(() => {
     setFocusedIndex(-1);
@@ -79,15 +81,11 @@ export default function App() {
   // Scroll to focused item
   useEffect(() => {
     if (focusedIndex !== -1 && virtuosoRef.current) {
-      // Use a small timeout to ensure the grid has rendered if needed
-      const timer = setTimeout(() => {
-        virtuosoRef.current.scrollToIndex({
-          index: focusedIndex,
-          align: 'center',
-          behavior: 'smooth'
-        });
-      }, 50);
-      return () => clearTimeout(timer);
+      virtuosoRef.current.scrollToIndex({
+        index: focusedIndex,
+        align: 'center',
+        behavior: 'smooth'
+      });
     }
   }, [focusedIndex]);
 
@@ -110,8 +108,10 @@ export default function App() {
   });
 
   // Gamepad Support
-  const lastButtonPressRef = useRef(0);
-  const BUTTON_COOLDOWN = 150;
+  const lastButtonPressRef = useRef<Record<string, number>>({});
+  const repeatCountRef = useRef<Record<string, number>>({});
+  const INITIAL_DELAY = 500;
+  const REPEAT_RATE = 220;
 
   useEffect(() => {
     let rafId: number;
@@ -122,62 +122,90 @@ export default function App() {
 
       if (gp && view === 'library') {
         const now = Date.now();
-        if (now - lastButtonPressRef.current > BUTTON_COOLDOWN) {
-          const up = gp.buttons[12]?.pressed || (gp.axes[1] < -0.5 && Math.abs(gp.axes[1]) > Math.abs(gp.axes[0]));
-          const down = gp.buttons[13]?.pressed || (gp.axes[1] > 0.5 && Math.abs(gp.axes[1]) > Math.abs(gp.axes[0]));
-          const left = gp.buttons[14]?.pressed || (gp.axes[0] < -0.5 && Math.abs(gp.axes[0]) > Math.abs(gp.axes[1]));
-          const right = gp.buttons[15]?.pressed || (gp.axes[0] > 0.5 && Math.abs(gp.axes[0]) > Math.abs(gp.axes[1]));
-          const select = gp.buttons[0]?.pressed;
-          const l1 = gp.buttons[4]?.pressed;
-          const r1 = gp.buttons[5]?.pressed;
+        
+        const isTriggered = (isPressed: boolean, key: string, customDelay?: number) => {
+          if (isPressed) {
+            const lastPress = lastButtonPressRef.current[key] || 0;
+            const count = repeatCountRef.current[key] || 0;
+            const delay = customDelay || (count === 0 ? INITIAL_DELAY : REPEAT_RATE);
 
-          if (l1 || r1) {
-            lastButtonPressRef.current = now;
-            const currentIndex = letters.indexOf(selectedLetter);
-            let nextIndex = currentIndex;
-            if (l1) nextIndex = Math.max(0, currentIndex - 1);
-            if (r1) nextIndex = Math.min(letters.length - 1, currentIndex + 1);
-            if (nextIndex !== currentIndex) {
-              setSelectedLetter(letters[nextIndex]);
-              playSound('click');
-              setFocusedIndex(-1);
+            if (now - lastPress > (count === 0 ? 0 : delay)) {
+              lastButtonPressRef.current[key] = now;
+              repeatCountRef.current[key] = count + 1;
+              return true;
             }
+          } else {
+            lastButtonPressRef.current[key] = 0;
+            repeatCountRef.current[key] = 0;
+          }
+          return false;
+        };
+
+        // Platform Switching (LT/RT)
+        const lt = isTriggered(gp.buttons[6]?.pressed || gp.buttons[6]?.value > 0.5, 'lt', 400);
+        const rt = isTriggered(gp.buttons[7]?.pressed || gp.buttons[7]?.value > 0.5, 'rt', 400);
+        if (lt || rt) {
+          const currentIndex = platforms.indexOf(selectedPlatform);
+          let nextIndex = currentIndex;
+          if (lt) nextIndex = currentIndex > 0 ? currentIndex - 1 : platforms.length - 1;
+          if (rt) nextIndex = currentIndex < platforms.length - 1 ? currentIndex + 1 : 0;
+          
+          if (nextIndex !== currentIndex) {
+            setSelectedPlatform(platforms[nextIndex]);
+            playSound('click');
+            setFocusedIndex(-1);
             return;
           }
+        }
 
-          if (up || down || left || right || select) {
-            if (select && focusedIndex !== -1) {
-              lastButtonPressRef.current = now;
-              handleSelectGame(filteredGames[focusedIndex]);
-              return;
-            }
-
-            let moved = false;
-            setFocusedIndex(prev => {
-              if (prev === -1) {
-                moved = true;
-                return 0;
-              }
-              
-              const cols = window.innerWidth >= 1280 ? 6 : window.innerWidth >= 1024 ? 5 : window.innerWidth >= 640 ? 3 : 2;
-              let next = prev;
-
-              if (right) next = Math.min(prev + 1, filteredGames.length - 1);
-              else if (left) next = Math.max(prev - 1, 0);
-              else if (down) next = Math.min(prev + cols, filteredGames.length - 1);
-              else if (up) next = Math.max(prev - cols, 0);
-              
-              if (next !== prev) {
-                moved = true;
-                playSound('hover');
-              }
-              return next;
-            });
-
-            if (moved) {
-              lastButtonPressRef.current = now;
-            }
+        // Letter Switching (L1/R1)
+        const l1 = isTriggered(gp.buttons[4]?.pressed, 'l1', 350);
+        const r1 = isTriggered(gp.buttons[5]?.pressed, 'r1', 350);
+        if (l1 || r1) {
+          const currentIndex = letters.indexOf(selectedLetter);
+          let nextIndex = currentIndex;
+          if (l1) nextIndex = Math.max(0, currentIndex - 1);
+          if (r1) nextIndex = Math.min(letters.length - 1, currentIndex + 1);
+          if (nextIndex !== currentIndex) {
+            setSelectedLetter(letters[nextIndex]);
+            playSound('click');
+            setFocusedIndex(-1);
           }
+          return;
+        }
+
+        // Navigation
+        const up = isTriggered(gp.buttons[12]?.pressed || gp.axes[1] < -0.5, 'up');
+        const down = isTriggered(gp.buttons[13]?.pressed || gp.axes[1] > 0.5, 'down');
+        const left = isTriggered(gp.buttons[14]?.pressed || gp.axes[0] < -0.5, 'left');
+        const right = isTriggered(gp.buttons[15]?.pressed || gp.axes[0] > 0.5, 'right');
+        const select = isTriggered(gp.buttons[0]?.pressed, 'select', 600);
+
+        if (select && focusedIndex !== -1) {
+          handleSelectGame(filteredGames[focusedIndex]);
+          return;
+        }
+
+        if (up || down || left || right) {
+          setFocusedIndex(prev => {
+            if (prev === -1) {
+              playSound('hover');
+              return 0;
+            }
+            
+            const cols = window.innerWidth >= 1280 ? 6 : window.innerWidth >= 1024 ? 5 : window.innerWidth >= 640 ? 3 : 2;
+            let next = prev;
+
+            if (right) next = Math.min(prev + 1, filteredGames.length - 1);
+            else if (left) next = Math.max(prev - 1, 0);
+            else if (down) next = Math.min(prev + cols, filteredGames.length - 1);
+            else if (up) next = Math.max(prev - cols, 0);
+            
+            if (next !== prev) {
+              playSound('hover');
+            }
+            return next;
+          });
         }
       }
       rafId = requestAnimationFrame(pollGamepad);
@@ -185,7 +213,7 @@ export default function App() {
 
     rafId = requestAnimationFrame(pollGamepad);
     return () => cancelAnimationFrame(rafId);
-  }, [view, focusedIndex, filteredGames, playSound, letters, selectedLetter]);
+  }, [view, focusedIndex, filteredGames, playSound, letters, selectedLetter, selectedPlatform, platforms]);
 
   const handleSelectGame = (game: Game) => {
     playSound('click');
