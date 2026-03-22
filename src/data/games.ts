@@ -1668,7 +1668,7 @@ export const GAMES: Game[] = [
     thumbnail: 'https://cdn11.bigcommerce.com/s-ymgqt/images/stencil/original/products/26220/53048/2020---------1__93081.1681412493.jpg?c=2',
     romUrl: 'https://raw.githubusercontent.com/hstle/snes/9c237ad4903f6bfb795fc70b3d81a5b77952a631/2020%20Super%20Baseball%20(USA).sfc',
     description: 'Baseball 2020',
-    year: '1996',
+    year: '1993',
     genre: 'Sports',
     platform: 'SNES',
     category: 'Action'
@@ -2262,7 +2262,7 @@ export const GAMES: Game[] = [
     thumbnail: 'https://i.ebayimg.com/images/g/4-4AAOSw-R1nnOz4/s-l1200.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/GoldenEye%20007%20(USA).z64',
     description: 'The classic Golden Eye.',
-    year: '1996',
+    year: '1997',
     genre: 'Shooter',
     platform: 'N64',
     category: 'Action'
@@ -2273,7 +2273,7 @@ export const GAMES: Game[] = [
     thumbnail: 'https://images.launchbox-app.com/f5d24a7d-612b-485e-8c94-9cc0f83e12fa.png',
     romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Fighting%20Force%2064%20(USA).z64',
     description: 'Fighting Force.',
-    year: '1996',
+    year: '1999',
     genre: 'Action',
     platform: 'N64',
     category: 'Action'
@@ -2294,8 +2294,8 @@ export const GAMES: Game[] = [
     title: 'Tony Hawks Pro Skater 3',
     thumbnail: 'https://i.ebayimg.com/images/g/Xl4AAOSwEm9khORn/s-l1200.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Tony%20Hawks%20Pro%20Skater%203%20(USA).z64',
-    description: 'The classic kart racer for Nintendo 64.',
-    year: '1996',
+    description: 'The classic skateboarding game for Nintendo 64.',
+    year: '2002',
     genre: 'Sports',
     platform: 'N64',
     category: 'Sports'
@@ -2306,7 +2306,7 @@ export const GAMES: Game[] = [
     thumbnail: 'https://i.ebayimg.com/images/g/aEAAAOSwRFpkYC3O/s-l1200.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Star%20Fox%2064%20(USA).z64',
     description: 'Star Fox 64',
-    year: '1996',
+    year: '1997',
     genre: 'Action',
     platform: 'N64',
     category: 'Action'
@@ -2316,8 +2316,52 @@ export const GAMES: Game[] = [
     title: 'Super Smash Bros',
     thumbnail: 'https://i.ebayimg.com/images/g/rKkAAOSwjoRkYC1L/s-l1200.jpg',
     romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Super%20Smash%20Bros.%20(USA).z64',
-    description: 'The classic kart racer for Nintendo 64.',
-    year: '1996',
+    description: 'The ultimate crossover fighting game for Nintendo 64.',
+    year: '1999',
+    genre: 'Fighting',
+    platform: 'N64',
+    category: 'Action'
+  },
+  {
+    id: 'f-zero-x',
+    title: 'F-Zero X',
+    thumbnail: 'https://upload.wikimedia.org/wikipedia/en/2/21/F-Zero_X_box_art.jpg',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/F-Zero%20X%20(USA).z64',
+    description: 'F-Zero',
+    year: '1998',
+    genre: 'Racing',
+    platform: 'N64',
+    category: 'Racing'
+  },
+  {
+    id: 'doom-64',
+    title: 'Doom 64',
+    thumbnail: 'https://i.ebayimg.com/images/g/wBAAAOSwUllkYDAv/s-l1200.jpg',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Doom%2064%20(USA).z64',
+    description: 'doom 64',
+    year: '1997',
+    genre: 'Shooter',
+    platform: 'N64',
+    category: 'Action'
+  },
+  {
+    id: 'banjo-kazooie',
+    title: 'Banjo-Kazooie',
+    thumbnail: 'https://i.ebayimg.com/images/g/1W4AAOSwf2NkYC9O/s-l400.jpg',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/Banjo-Kazooie%20(USA).z64',
+    description: 'The classic platformer for Nintendo 64.',
+    year: '1998',
+    genre: 'Platform',
+    platform: 'N64',
+    category: 'Action'
+  },
+  {
+    id: '1080-snowboarding',
+    title: '1080 Snowboarding',
+    thumbnail: 'https://i.ebayimg.com/images/g/f18AAOSwVCVkYC7O/s-l1200.jpg',
+    romUrl: 'https://raw.githubusercontent.com/hstle/gs64/main/1080%20Snowboarding%20(USA)%20(En%2CJa)%20(LodgeNet).z64',
+    description: 'The classic snowboarding game for Nintendo 64.',
+    year: '1998',
     genre: 'Racing',
     platform: 'N64',
     category: 'Racing'

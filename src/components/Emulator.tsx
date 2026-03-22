@@ -105,7 +105,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 window.EJS_webgl = true;
                 window.EJS_ad_url = '';
                 // PSX BIOS (SCPH5501 is highly compatible)
-                const biosUrl = 'https://api.allorigins.win/get?url=https%3A//archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
+                const biosUrl = 'https://raw.githubusercontent.com/libretro/libretro-super/master/retroarch/pkg/apple/ios/Resources/bios/scph5501.bin';
                 window.EJS_biosUrl = biosUrl;
               }
               
@@ -267,14 +267,14 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                       className="absolute inset-0 border-4 border-emerald-500/10 rounded-full"
                     />
                     <motion.div 
-                      className="absolute inset-0 border-4 border-emerald-500 border-t-transparent border-r-transparent rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 border-4 border-transparent border-t-emerald-500 rounded-full will-change-transform"
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     />
                     <motion.div 
-                      className="absolute inset-4 border-2 border-emerald-500/20 rounded-full"
-                      animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.5, 0.2] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute inset-4 border-2 border-emerald-500/10 rounded-full will-change-transform"
+                      animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.3, 0.1] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Gamepad2 className="text-emerald-500" size={40} />
