@@ -95,7 +95,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               window.EJS_player = '#game';
               window.EJS_gameUrl = '${romUrl}';
               window.EJS_core = '${core}';
-              window.EJS_pathtodata = 'https://cdn.emulatorjs.org/latest/data/';
+              window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
               window.EJS_language = 'en-US';
               window.EJS_startOnLoaded = true;
               
@@ -105,7 +105,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
                 window.EJS_webgl = true;
                 window.EJS_ad_url = '';
                 // PSX BIOS (SCPH5501 is highly compatible)
-                const biosUrl = 'https://archive.org/download/scph5501_202306/scph5501.bin';
+                const biosUrl = 'https://api.allorigins.win/get?url=https%3A//archive.org/download/ps1-2-BIOS/SCPH1001.BIN';
                 window.EJS_biosUrl = biosUrl;
               }
               
@@ -129,7 +129,7 @@ export const Emulator: React.FC<EmulatorProps> = ({ game, onBack }) => {
               };
             </script>
             <script 
-              src="https://cdn.emulatorjs.org/latest/data/loader.js" 
+              src="https://cdn.emulatorjs.org/stable/data/loader.js" 
               crossorigin="anonymous"
               onerror="window.parent.postMessage({ type: 'EJS_ERROR', message: 'Failed to load emulator engine script' }, '*')"
             ></script>
