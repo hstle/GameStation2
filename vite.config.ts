@@ -12,35 +12,35 @@ export default defineConfig(({mode}) => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+        includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
           name: 'GameStation',
           short_name: 'GameStation',
           description: 'The ultimate retro gaming platform in your browser.',
           theme_color: '#0a0a0a',
           background_color: '#0a0a0a',
-          display: 'standalone',
+          display: 'fullscreen',
           orientation: 'any',
           scope: '/',
           start_url: '/',
           icons: [
             {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png'
+              src: 'favicon.svg',
+              sizes: 'any',
+              type: 'image/svg+xml',
+              purpose: 'any maskable'
             },
             {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            },
-            {
-              src: 'pwa-512x512.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/3408/3408455.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
             }
           ]
+        },
+        workbox: {
+          cleanupOutdatedCaches: true,
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}']
         }
       })
     ],
